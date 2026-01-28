@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indicadores de Saúde - SaúdePG</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+</head>
+<body class="bg-gray-50">
+    <custom-navbar></custom-navbar>
+    
+    <main>
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-br from-emerald-50 via-teal-50 to-emerald-50 py-16 md:py-24">
+            <div class="container mx-auto px-4">
+                <a href="index.html" class="inline-flex items-center gap-2 text-emerald-600 hover:text-emerald-800 mb-6 font-semibold transition">
+                    <i data-feather="arrow-left"></i> Voltar
+                </a>
+                <h1 class="text-5xl md:text-6xl font-bold mb-4 leading-tight">
+                    Indicadores de <span class="bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">Saúde</span>
+                </h1>
+                <p class="text-xl text-gray-600 max-w-2xl">Acompanhe as principais métricas e indicadores que refletem a qualidade dos serviços de saúde de Ponta Grossa.</p>
+            </div>
+        </section>
+
+        <!-- KPIs Principais -->
+        <section class="container mx-auto px-4 py-20">
+            <h2 class="text-4xl font-bold mb-16 text-center">Principais Indicadores</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- KPI 1 -->
+                <div class="card group overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-emerald-600 to-teal-600 opacity-0 group-hover:opacity-5 transition-opacity"></div>
+                    <div class="relative">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-gray-600 font-semibold">Cobertura de Atendimento</h3>
+                            <div class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-lg flex items-center justify-center">
+                                <i data-feather="users" class="text-white"></i>
+                            </div>
+                        </div>
+                        <p class="text-4xl font-bold bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent mb-2">98.5%</p>
+                        <div class="flex items-center gap-1 text-emerald-600">
+                            <i data-feather="arrow-up" class="w-4 h-4"></i>
+                            <span class="text-sm font-semibold">2.3% vs ano anterior</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KPI 2 -->
+                <div class="card group overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-teal-600 to-cyan-600 opacity-0 group-hover:opacity-5 transition-opacity"></div>
+                    <div class="relative">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-gray-600 font-semibold">Taxa de Vacinação</h3>
+                            <div class="w-12 h-12 bg-gradient-to-br from-teal-500 to-teal-600 rounded-lg flex items-center justify-center">
+                                <i data-feather="shield" class="text-white"></i>
+                            </div>
+                        </div>
+                        <p class="text-4xl font-bold bg-gradient-to-r from-teal-600 to-cyan-500 bg-clip-text text-transparent mb-2">92.1%</p>
+                        <div class="flex items-center gap-1 text-teal-600">
+                            <i data-feather="arrow-up" class="w-4 h-4"></i>
+                            <span class="text-sm font-semibold">4.2% vs ano anterior</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KPI 3 -->
+                <div class="card group overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-cyan-600 to-blue-600 opacity-0 group-hover:opacity-5 transition-opacity"></div>
+                    <div class="relative">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-gray-600 font-semibold">Satisfação do Paciente</h3>
+                            <div class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-lg flex items-center justify-center">
+                                <i data-feather="smile" class="text-white"></i>
+                            </div>
+                        </div>
+                        <p class="text-4xl font-bold bg-gradient-to-r from-cyan-600 to-blue-500 bg-clip-text text-transparent mb-2">87.4%</p>
+                        <div class="flex items-center gap-1 text-cyan-600">
+                            <i data-feather="arrow-up" class="w-4 h-4"></i>
+                            <span class="text-sm font-semibold">3.1% vs ano anterior</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- KPI 4 -->
+                <div class="card group overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-600 to-indigo-600 opacity-0 group-hover:opacity-5 transition-opacity"></div>
+                    <div class="relative">
+                        <div class="flex items-center justify-between mb-6">
+                            <h3 class="text-gray-600 font-semibold">População Cadastrada</h3>
+                            <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center">
+                                <i data-feather="activity" class="text-white"></i>
+                            </div>
+                        </div>
+                        <p class="text-4xl font-bold bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent mb-2">284.5K</p>
+                        <div class="flex items-center gap-1 text-blue-600">
+                            <i data-feather="arrow-up" class="w-4 h-4"></i>
+                            <span class="text-sm font-semibold">1.8% vs ano anterior</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Gráficos -->
+        <section class="container mx-auto px-4 py-20">
+            <h2 class="text-4xl font-bold mb-16 text-center">Dados e Tendências</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <!-- Chart 1: Attendance Trend -->
+                <div class="card">
+                    <h3 class="text-xl font-bold mb-6 text-gray-900">Tendência de Atendimentos (2023-2024)</h3>
+                    <canvas id="attendanceChart"></canvas>
+                </div>
+
+                <!-- Chart 2: Vaccination by Age -->
+                <div class="card">
+                    <h3 class="text-xl font-bold mb-6 text-gray-900">Vacinação por Faixa Etária</h3>
+                    <canvas id="ageChart"></canvas>
+                </div>
+
+                <!-- Chart 3: Services Distribution -->
+                <div class="card">
+                    <h3 class="text-xl font-bold mb-6 text-gray-900">Distribuição de Atendimentos por Serviço</h3>
+                    <canvas id="servicesChart"></canvas>
+                </div>
+
+                <!-- Chart 4: Comparison -->
+                <div class="card">
+                    <h3 class="text-xl font-bold mb-6 text-gray-900">Comparação Anual 2023 x 2024</h3>
+                    <canvas id="comparisonChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Programas de Saúde -->
+        <section class="bg-gradient-to-br from-slate-900 to-slate-800 py-20">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-white mb-16 text-center">Programas de Saúde em Destaque</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Programa 1 -->
+                    <div class="bg-white bg-opacity-5 backdrop-blur-sm rounded-2xl p-8 border border-white border-opacity-10 group hover:border-opacity-20 transition">
+                        <div class="flex gap-4 mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                <i data-feather="heart-handshake" class="w-8 h-8 text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-1">Programa Materno-Infantil</h3>
+                                <p class="text-emerald-300 text-sm">Acompanhamento de gestantes e crianças</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 mb-4">Oferece pré-natal, parto seguro, puerpério e acompanhamento do recém-nascido, visando reduzir a mortalidade infantil.</p>
+                        <div class="flex gap-2 pt-4 border-t border-white border-opacity-10">
+                            <span class="px-3 py-1 bg-emerald-600 bg-opacity-20 text-emerald-300 rounded-full text-sm">Ativo</span>
+                            <span class="px-3 py-1 bg-emerald-600 bg-opacity-20 text-emerald-300 rounded-full text-sm">Prioritário</span>
+                        </div>
+                    </div>
+
+                    <!-- Programa 2 -->
+                    <div class="bg-white bg-opacity-5 backdrop-blur-sm rounded-2xl p-8 border border-white border-opacity-10 group hover:border-opacity-20 transition">
+                        <div class="flex gap-4 mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                <i data-feather="activity" class="w-8 h-8 text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-1">Programa de Doenças Crônicas</h3>
+                                <p class="text-teal-300 text-sm">Hipertensão, diabetes e outras condições</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 mb-4">Monitoramento contínuo, medicação e orientação para controle de doenças crônicas não transmissíveis.</p>
+                        <div class="flex gap-2 pt-4 border-t border-white border-opacity-10">
+                            <span class="px-3 py-1 bg-teal-600 bg-opacity-20 text-teal-300 rounded-full text-sm">Ativo</span>
+                            <span class="px-3 py-1 bg-teal-600 bg-opacity-20 text-teal-300 rounded-full text-sm">Contínuo</span>
+                        </div>
+                    </div>
+
+                    <!-- Programa 3 -->
+                    <div class="bg-white bg-opacity-5 backdrop-blur-sm rounded-2xl p-8 border border-white border-opacity-10 group hover:border-opacity-20 transition">
+                        <div class="flex gap-4 mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                <i data-feather="shield" class="w-8 h-8 text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-1">Programa de Vacinação</h3>
+                                <p class="text-cyan-300 text-sm">Cobertura vacinal e imunizações</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 mb-4">Imunizações de rotina e campanhas especiais, garantindo proteção contra doenças transmissíveis.</p>
+                        <div class="flex gap-2 pt-4 border-t border-white border-opacity-10">
+                            <span class="px-3 py-1 bg-cyan-600 bg-opacity-20 text-cyan-300 rounded-full text-sm">Ativo</span>
+                            <span class="px-3 py-1 bg-cyan-600 bg-opacity-20 text-cyan-300 rounded-full text-sm">Essencial</span>
+                        </div>
+                    </div>
+
+                    <!-- Programa 4 -->
+                    <div class="bg-white bg-opacity-5 backdrop-blur-sm rounded-2xl p-8 border border-white border-opacity-10 group hover:border-opacity-20 transition">
+                        <div class="flex gap-4 mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                <i data-feather="brain" class="w-8 h-8 text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white mb-1">Saúde Mental</h3>
+                                <p class="text-blue-300 text-sm">Atendimento e apoio psicossocial</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-300 mb-4">Suporte em saúde mental, acompanhamento psicológico e encaminhamento para especialistas quando necessário.</p>
+                        <div class="flex gap-2 pt-4 border-t border-white border-opacity-10">
+                            <span class="px-3 py-1 bg-blue-600 bg-opacity-20 text-blue-300 rounded-full text-sm">Ativo</span>
+                            <span class="px-3 py-1 bg-blue-600 bg-opacity-20 text-blue-300 rounded-full text-sm">Crescente</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Meta de Saúde -->
+        <section class="container mx-auto px-4 py-20">
+            <h2 class="text-4xl font-bold mb-12 text-center">Metas de Saúde 2024</h2>
+            <div class="space-y-6">
+                <!-- Meta 1 -->
+                <div class="card">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <h3 class="font-bold text-gray-900 mb-1">Aumentar cobertura de vacinação para 95%</h3>
+                            <p class="text-gray-600 text-sm">Campanha contínua de imunização</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-2xl font-bold text-teal-600">92.1%</p>
+                        </div>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                        <div class="bg-gradient-to-r from-teal-500 to-emerald-500 h-full rounded-full" style="width: 97%"></div>
+                    </div>
+                </div>
+
+                <!-- Meta 2 -->
+                <div class="card">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <h3 class="font-bold text-gray-900 mb-1">Reduzir tempo de atendimento para 30 minutos</h3>
+                            <p class="text-gray-600 text-sm">Otimização de processos nas UBS</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-2xl font-bold text-cyan-600">35 min</p>
+                        </div>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                        <div class="bg-gradient-to-r from-cyan-500 to-blue-500 h-full rounded-full" style="width: 85%"></div>
+                    </div>
+                </div>
+
+                <!-- Meta 3 -->
+                <div class="card">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <h3 class="font-bold text-gray-900 mb-1">Atingir satisfação do paciente de 90%</h3>
+                            <p class="text-gray-600 text-sm">Melhoria contínua na qualidade</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-2xl font-bold text-emerald-600">87.4%</p>
+                        </div>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                        <div class="bg-gradient-to-r from-emerald-500 to-teal-500 h-full rounded-full" style="width: 97%"></div>
+                    </div>
+                </div>
+
+                <!-- Meta 4 -->
+                <div class="card">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <h3 class="font-bold text-gray-900 mb-1">Cadastrar 100% da população</h3>
+                            <p class="text-gray-600 text-sm">Registro completo no sistema de saúde</p>
+                        </div>
+                        <div class="text-right">
+                            <p class="text-2xl font-bold text-blue-600">98.5%</p>
+                        </div>
+                    </div>
+                    <div class="w-full bg-gray-200 rounded-full h-3 overflow-hidden">
+                        <div class="bg-gradient-to-r from-blue-500 to-indigo-500 h-full rounded-full" style="width: 98.5%"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="bg-gradient-to-r from-emerald-600 to-teal-500 py-16 md:py-20">
+            <div class="container mx-auto px-4 text-center text-white">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Quer conhecer mais sobre saúde?</h2>
+                <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">Acesse nossos outros recursos e informações sobre atendimento</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <a href="atendimento.html" class="btn bg-white text-emerald-600 hover:bg-gray-100 font-semibold">
+                        <i data-feather="home" class="inline mr-2 w-5 h-5"></i>
+                        Como ser Atendido
+                    </a>
+                    <a href="direitos.html" class="btn bg-transparent border-2 border-white hover:bg-white hover:text-emerald-600 font-semibold">
+                        <i data-feather="shield" class="inline mr-2 w-5 h-5"></i>
+                        Seus Direitos
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <custom-footer></custom-footer>
+
+    <script>
+        // Chart 1: Attendance Trend
+        const attendanceCtx = document.getElementById('attendanceChart').getContext('2d');
+        new Chart(attendanceCtx, {
+            type: 'line',
+            data: {
+                labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'],
+                datasets: [{
+                    label: '2024',
+                    data: [4200, 4800, 5100, 4900, 5300, 5600, 5400, 5800, 6100, 6300, 6500, 6800],
+                    borderColor: '#10b981',
+                    backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                    tension: 0.4,
+                    fill: true,
+                    pointBackgroundColor: '#10b981',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 6,
+                    pointHoverRadius: 8
+                }, {
+                    label: '2023',
+                    data: [3800, 4100, 4400, 4200, 4600, 4900, 4700, 5000, 5200, 5400, 5600, 5800],
+                    borderColor: '#06b6d4',
+                    backgroundColor: 'rgba(6, 182, 212, 0.1)',
+                    tension: 0.4,
+                    fill: true,
+                    pointBackgroundColor: '#06b6d4',
+                    pointBorderColor: '#fff',
+                    pointBorderWidth: 2,
+                    pointRadius: 6,
+                    pointHoverRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        max: 7000
+                    }
+                }
+            }
+        });
+
+        // Chart 2: Vaccination by Age
+        const ageCtx = document.getElementById('ageChart').getContext('2d');
+        new Chart(ageCtx, {
+            type: 'doughnut',
+            data: {
+                labels: ['0-5 anos', '5-10 anos', '10-20 anos', '20-40 anos', '40-60 anos', '60+ anos'],
+                datasets: [{
+                    data: [18, 16, 15, 22, 18, 11],
+                    backgroundColor: [
+                        '#10b981',
+                        '#14b8a6',
+                        '#06b6d4',
+                        '#0ea5e9',
+                        '#3b82f6',
+                        '#6366f1'
+                    ],
+                    borderColor: '#fff',
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }
+        });
+
+        // Chart 3: Services Distribution
+        const servicesCtx = document.getElementById('servicesChart').getContext('2d');
+        new Chart(servicesCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Atenção Básica', 'Especialidades', 'Exames', 'Pronto Atendimento', 'Vacinação'],
+                datasets: [{
+                    label: 'Atendimentos',
+                    data: [42000, 18000, 12000, 8000, 6000],
+                    backgroundColor: [
+                        '#10b981',
+                        '#14b8a6',
+                        '#06b6d4',
+                        '#0ea5e9',
+                        '#3b82f6'
+                    ],
+                    borderRadius: 8,
+                    borderSkipped: false
+                }]
+            },
+            options: {
+                responsive: true,
+                indexAxis: 'y',
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        // Chart 4: Comparison
+        const comparisonCtx = document.getElementById('comparisonChart').getContext('2d');
+        new Chart(comparisonCtx, {
+            type: 'bar',
+            data: {
+                labels: ['Atendimentos', 'Vacinações', 'Exames', 'Consultas Especialidades'],
+                datasets: [{
+                    label: '2023',
+                    data: [65000, 52000, 28000, 15000],
+                    backgroundColor: '#06b6d4',
+                    borderRadius: 8
+                }, {
+                    label: '2024',
+                    data: [72000, 58000, 32000, 18000],
+                    backgroundColor: '#10b981',
+                    borderRadius: 8
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            feather.replace();
+        });
+    </script>
+    <script src="js/animations.js"></script>
+</body>
+</html>

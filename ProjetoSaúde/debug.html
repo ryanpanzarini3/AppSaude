@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug - Unidades Próximas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script src="components/unidades-proximas.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .debug-info { background: #f0f0f0; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+        .error { color: red; }
+        .success { color: green; }
+    </style>
+</head>
+<body>
+    <h1>Debug - Componente Unidades Próximas</h1>
+    
+    <div class="debug-info">
+        <h3>Status do Componente:</h3>
+        <p id="leaflet-status"></p>
+        <p id="component-status"></p>
+        <p id="element-status"></p>
+    </div>
+
+    <h2>Componente:</h2>
+    <unidades-proximas></unidades-proximas>
+
+    <script>
+        // Verificar Leaflet
+        if (typeof L !== 'undefined') {
+            document.getElementById('leaflet-status').innerHTML = '<span class="success">✓ Leaflet carregado</span>';
+        } else {
+            document.getElementById('leaflet-status').innerHTML = '<span class="error">✗ Leaflet NÃO carregado</span>';
+        }
+
+        // Verificar componente
+        if (customElements.get('unidades-proximas')) {
+            document.getElementById('component-status').innerHTML = '<span class="success">✓ Componente registrado</span>';
+        } else {
+            document.getElementById('component-status').innerHTML = '<span class="error">✗ Componente NÃO registrado</span>';
+        }
+
+        // Verificar elemento no DOM
+        setTimeout(() => {
+            const elem = document.querySelector('unidades-proximas');
+            if (elem) {
+                document.getElementById('element-status').innerHTML = '<span class="success">✓ Elemento no DOM, innerHTML: ' + (elem.innerHTML ? 'Sim' : 'NÃO') + '</span>';
+            } else {
+                document.getElementById('element-status').innerHTML = '<span class="error">✗ Elemento NÃO encontrado</span>';
+            }
+        }, 500);
+    </script>
+</body>
+</html>

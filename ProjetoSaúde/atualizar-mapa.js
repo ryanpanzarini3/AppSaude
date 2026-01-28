@@ -1,0 +1,73 @@
+/**
+ * Script para atualizar mapa.js com coordenadas geocodificadas
+ * Executa depois que geocode.js gera o arquivo coordenadas_geocodificadas.json
+ */
+
+const fs = require('fs');
+const path = require('path');
+
+function updateMapWithCoordinates() {
+    const coordPath = path.join(__dirname, 'coordenadas_geocodificadas.json');
+    const mapaPath = path.join(__dirname, 'js', 'mapa.js');
+
+    if (!fs.existsSync(coordPath)) {
+        console.error('❌ Arquivo coordenadas_geocodificadas.json não encontrado!');
+        console.error('Execute primeiro: node geocode.js');
+        process.exit(1);
+    }
+
+    // Ler coordenadas geocodificadas
+    const coordenadas = JSON.parse(fs.readFileSync(coordPath, 'utf8'));
+    const mapaContent = fs.readFileSync(mapaPath, 'utf8');
+
+    // Atualizar UBS
+    let updatedMapa = mapaContent;
+    let ubsUpdated = 0;
+    let upaUpdated = 0;
+
+    // Processar UBS
+    for (const ubsResult of coordenadas.ubs) {
+        if (ubsResult.sucesso) {
+            // Encontrar o padrão para esta unidade
+            const regex = new RegExp(
+                `nome: "${ubsResult.nome.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}",[^}]*?lat: [^,]+, lng: [^,]+`,
+                'g'
+            );
+
+            updatedMapa = updatedMapa.replace(regex, (match) => {
+                ubsUpdated++;
+                return match.replace(/lat: -?\d+\.?\d*/, `lat: ${ubsResult.lat}`)
+                            .replace(/lng: -?\d+\.?\d*/, `lng: ${ubsResult.lng}`);
+            });
+        }
+    }
+
+    // Processar UPAs
+    for (const upaResult of coordenadas.upa) {
+        if (upaResult.sucesso) {
+            const regex = new RegExp(
+                `nome: "${upaResult.nome.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}",[^}]*?lat: [^,]+, lng: [^,]+`,
+                'g'
+            );
+
+            updatedMapa = updatedMapa.replace(regex, (match) => {
+                upaUpdated++;
+                return match.replace(/lat: -?\d+\.?\d*/, `lat: ${upaResult.lat}`)
+                            .replace(/lng: -?\d+\.?\d*/, `lng: ${upaResult.lng}`);
+            });
+        }
+    }
+
+    // Salvar arquivo atualizado
+    fs.writeFileSync(mapaPath, updatedMapa);
+
+    console.log('\n' + '='.repeat(60));
+    console.log('✅ MAPA ATUALIZADO COM SUCESSO!');
+    console.log('='.repeat(60));
+    console.log(`✅ UBS atualizadas: ${ubsUpdated}/47`);
+    console.log(`✅ UPAs atualizadas: ${upaUpdated}/3`);
+    console.log(`📁 Arquivo atualizado: ${mapaPath}`);
+    console.log('='.repeat(60));
+}
+
+updateMapWithCoordinates();

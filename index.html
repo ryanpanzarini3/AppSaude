@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0F6BFF">
+    <meta name="description" content="Acesso completo aos serviços de saúde de Ponta Grossa. Encontre unidades, agende consultas e conheça seus direitos.">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="SaúdePG">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect fill='%230F6BFF' width='192' height='192'/><text x='50%' y='50%' font-size='120' fill='white' font-weight='bold' text-anchor='middle' dominant-baseline='central'>S</text></svg>">
+    
+    <title>SaúdePG - Portal de Saúde Municipal</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230F6BFF' width='100' height='100'/><text x='50' y='70' font-size='80' fill='white' font-weight='bold' text-anchor='middle'>S</text></svg>">
+    <link rel="stylesheet" href="style.css">
+    
+    <!-- Leaflet CSS para o mapa -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="components/quick-access.js"></script>
+    <script src="components/unidades-proximas.js"></script>
+    <script src="components/install-prompt.js"></script>
+</head>
+<body class="bg-gray-50">
+    <install-prompt></install-prompt>
+    <custom-navbar></custom-navbar>
+    
+    <main>
+        <!-- Hero Section -->
+        <section class="relative overflow-hidden bg-gradient-to-br from-blue-50 to-cyan-50">
+            <div class="absolute inset-0 opacity-10">
+                <svg class="absolute top-0 left-0 w-96 h-96" viewBox="0 0 400 400" fill="none">
+                    <circle cx="200" cy="200" r="150" stroke="#0F6BFF" stroke-width="1" opacity="0.1"/>
+                    <circle cx="200" cy="200" r="100" stroke="#00D4FF" stroke-width="1" opacity="0.1"/>
+                </svg>
+            </div>
+            
+            <div class="container mx-auto px-4 py-8 md:py-32 relative z-10">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
+                    <div class="animate-fade-in">
+                        <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 md:mb-6 leading-tight">
+                            <span class="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
+                                Sua Saúde
+                            </span>
+                            <br>
+                            <span class="text-gray-900">ao Alcance</span>
+                        </h1>
+                        <p class="text-base sm:text-lg md:text-xl text-gray-600 mb-6 md:mb-8 max-w-md">
+                            Acesso completo aos serviços de saúde de Ponta Grossa. Encontre unidades, agende consultas e conheça seus direitos.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-3 sm:gap-4">
+                            <a href="mapa.html" class="btn btn-primary w-full sm:w-auto text-center">
+                                <i data-feather="map" class="inline mr-2 w-5 h-5"></i>
+                                Encontrar Unidades
+                            </a>
+                            <a href="atendimento.html" class="btn btn-secondary w-full sm:w-auto text-center">
+                                <i data-feather="help-circle" class="inline mr-2 w-5 h-5"></i>
+                                Como Ser Atendido
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="hidden md:block">
+                        <div class="relative">
+                            <div class="absolute inset-0 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-2xl blur-3xl opacity-20"></div>
+                            <svg class="relative w-full h-auto" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <circle cx="150" cy="150" r="100" fill="#0F6BFF" opacity="0.1"/>
+                                <circle cx="150" cy="150" r="80" fill="#00D4FF" opacity="0.2"/>
+                                <path d="M150 80 L180 140 L140 140 Z" fill="#0F6BFF"/>
+                                <circle cx="150" cy="150" r="50" fill="#fff" stroke="#0F6BFF" stroke-width="2"/>
+                                <text x="150" y="160" text-anchor="middle" font-size="40" fill="#0F6BFF">+</text>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Access -->
+        <section class="container mx-auto px-4 py-12 md:py-20">
+            <custom-quick-access></custom-quick-access>
+        </section>
+
+        <!-- Unidades Próximas -->
+        <section class="container mx-auto px-4 py-12 md:py-20">
+            <unidades-proximas></unidades-proximas>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="bg-gradient-to-r from-blue-600 to-cyan-500 py-12 md:py-16">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 text-white">
+                    <div class="text-center">
+                        <div class="text-3xl sm:text-5xl font-bold mb-2">50</div>
+                        <p class="text-xs sm:text-lg text-white">Unidades de Saúde</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl sm:text-5xl font-bold mb-2">98.5%</div>
+                        <p class="text-xs sm:text-lg text-white">Cobertura Municipal</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl sm:text-5xl font-bold mb-2">95.2%</div>
+                        <p class="text-xs sm:text-lg text-white">Taxa de Vacinação</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-3xl sm:text-5xl font-bold mb-2">8.7/10</div>
+                        <p class="text-xs sm:text-lg text-white">Satisfação do Paciente</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Information Sections -->
+        <section class="container mx-auto px-4 py-12 md:py-20">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-center mb-10 md:mb-16">
+                Informações Importantes
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                <!-- Card 1: Atendimento -->
+                <a href="atendimento.html" class="card group hover:border-blue-400">
+                    <div class="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                        <i data-feather="phone" class="w-7 h-7 sm:w-8 sm:h-8 text-white"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold mb-3 group-hover:text-blue-600">Onde Ser Atendido</h3>
+                    <p class="text-sm sm:text-base text-gray-600 mb-4">Conheça os tipos de atendimento, horários, como agendar consultas e documentos necessários.</p>
+                    <div class="text-blue-600 font-semibold group-hover:translate-x-2 transition">
+                        Saiba mais →
+                    </div>
+                </a>
+                
+                <!-- Card 2: Direitos -->
+                <a href="direitos.html" class="card group hover:border-cyan-400">
+                    <div class="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                        <i data-feather="shield" class="w-7 h-7 sm:w-8 sm:h-8 text-white"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold mb-3 group-hover:text-cyan-600">Seus Direitos</h3>
+                    <p class="text-sm sm:text-base text-gray-600 mb-4">Direitos garantidos pelo SUS, confidencialidade, consentimento informado e deveres do paciente.</p>
+                    <div class="text-cyan-600 font-semibold group-hover:translate-x-2 transition">
+                        Saiba mais →
+                    </div>
+                </a>
+                
+                <!-- Card 3: Indicadores -->
+                <a href="indicadores.html" class="card group hover:border-green-400">
+                    <div class="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition">
+                        <i data-feather="bar-chart-2" class="w-7 h-7 sm:w-8 sm:h-8 text-white"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold mb-3 group-hover:text-green-600">Indicadores</h3>
+                    <p class="text-sm sm:text-base text-gray-600 mb-4">Acompanhe dados, estatísticas de saúde, programas em andamento e metas municipais.</p>
+                    <div class="text-green-600 font-semibold group-hover:translate-x-2 transition">
+                        Saiba mais →
+                    </div>
+                </a>
+            </div>
+        </section>
+        <!-- CTA Section -->
+        <section class="bg-gradient-to-r from-blue-600 to-cyan-500 py-12 md:py-20">
+            <div class="container mx-auto px-4 text-center text-white">
+                <h2 class="text-2xl sm:text-3xl md:text-5xl font-bold mb-4 md:mb-6">Precisa de Ajuda?</h2>
+                <p class="text-base sm:text-lg md:text-xl mb-6 md:mb-8 opacity-90">Entre em contato com a Secretaria Municipal de Saúde</p>
+                <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4">
+                    <a href="tel:+554231234567" class="btn bg-white text-blue-600 hover:bg-gray-100 w-full sm:w-auto">
+                        <i data-feather="phone" class="inline mr-2 w-5 h-5"></i>
+                        (42) 3123-4567
+                    </a>
+                    <a href="mailto:saude@pontagrossa.pr.gov.br" class="btn bg-white text-blue-600 hover:bg-gray-100 w-full sm:w-auto">
+                        <i data-feather="mail" class="inline mr-2 w-5 h-5"></i>
+                        E-mail
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <custom-footer></custom-footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('=== PAGE LOADED ===');
+            console.log('✓ Leaflet loaded:', typeof L !== 'undefined');
+            console.log('✓ Component registered:', customElements.get('unidades-proximas') !== undefined);
+            
+            const unidadesElement = document.querySelector('unidades-proximas');
+            console.log('✓ unidades-proximas element found:', unidadesElement !== null);
+            if (unidadesElement) {
+                console.log('  - innerHTML length:', unidadesElement.innerHTML.length);
+                console.log('  - has children:', unidadesElement.children.length);
+            }
+            
+            feather.replace();
+        });
+    </script>
+    <script src="script.js"></script>
+    <script src="js/animations.js"></script>
+    
+    <!-- Service Worker Registration para PWA -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('service-worker.js')
+                    .then(registration => {
+                        console.log('✓ Service Worker registrado com sucesso:', registration);
+                        
+                        // Verificar atualizações
+                        registration.addEventListener('updatefound', () => {
+                            const newWorker = registration.installing;
+                            newWorker.addEventListener('statechange', () => {
+                                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                    console.log('✓ Nova versão disponível. Recarregue a página para atualizar.');
+                                    // Aqui você pode mostrar uma notificação ao usuário
+                                }
+                            });
+                        });
+                    })
+                    .catch(error => console.error('✗ Erro ao registrar Service Worker:', error));
+            });
+            
+            // Detectar quando voltar online
+            window.addEventListener('online', () => {
+                console.log('✓ Voltou Online - sincronizando dados...');
+                if (navigator.serviceWorker.controller) {
+                    navigator.serviceWorker.controller.postMessage({ action: 'sync' });
+                }
+            });
+            
+            window.addEventListener('offline', () => {
+                console.log('✗ Offline - usando cache local');
+            });
+        }
+    </script>
+</body>
+
+</html>

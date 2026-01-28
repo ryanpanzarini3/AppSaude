@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Direitos do Paciente - SaúdePG</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+</head>
+<body class="bg-gray-50">
+    <custom-navbar></custom-navbar>
+    
+    <main>
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-br from-purple-50 via-pink-50 to-purple-50 py-16 md:py-24">
+            <div class="container mx-auto px-4">
+                <a href="index.html" class="inline-flex items-center gap-2 text-purple-600 hover:text-purple-800 mb-6 font-semibold transition">
+                    <i data-feather="arrow-left"></i> Voltar
+                </a>
+                <h1 class="text-5xl md:text-6xl font-bold mb-4 leading-tight">
+                    Seus <span class="bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent">Direitos</span>
+                </h1>
+                <p class="text-xl text-gray-600 max-w-2xl">Conheça todos os seus direitos como usuário do Sistema Único de Saúde (SUS) e como exigir um atendimento digno e de qualidade.</p>
+            </div>
+        </section>
+
+        <!-- Intro Card -->
+        <section class="container mx-auto px-4 py-16">
+            <div class="bg-gradient-to-br from-purple-600 to-pink-500 rounded-2xl p-8 md:p-12 text-white shadow-xl">
+                <div class="flex gap-4 mb-6">
+                    <div class="w-16 h-16 bg-white bg-opacity-20 rounded-xl flex items-center justify-center flex-shrink-0">
+                        <i data-feather="shield" class="w-8 h-8"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-3xl font-bold mb-2">Seus Direitos são Garantidos</h2>
+                        <p class="text-purple-100">A Constituição Federal e a Lei Orgânica da Saúde garantem direitos inalienáveis a todo cidadão</p>
+                    </div>
+                </div>
+                <p class="text-purple-100 leading-relaxed">Conhecer seus direitos é fundamental para garantir um atendimento de qualidade, para exercer sua cidadania e para reivindicar melhorias nos serviços de saúde. O SUS foi criado com princípios de universalidade, equidade e integralidade.</p>
+            </div>
+        </section>
+
+        <!-- 6 Direitos Principais (Tabs-like) -->
+        <section class="container mx-auto px-4 py-20">
+            <h2 class="text-4xl font-bold mb-16 text-center">Direitos Fundamentais do Paciente</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Direito 1 -->
+                <div class="group card overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-purple-600 to-pink-500 opacity-0 group-hover:opacity-5 transition-opacity"></div>
+                    <div class="relative">
+                        <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mb-6 text-white">
+                            <i data-feather="check-circle" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 group-hover:text-purple-600 transition">Acesso Universal</h3>
+                        <p class="text-gray-600">Toda pessoa tem direito ao acesso aos serviços de saúde, sem qualquer discriminação, independentemente de sua situação econômica, origem ou condição.</p>
+                    </div>
+                </div>
+
+                <!-- Direito 2 -->
+                <div class="group card overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-pink-600 to-red-500 opacity-0 group-hover:opacity-5 transition-opacity"></div>
+                    <div class="relative">
+                        <div class="w-12 h-12 bg-gradient-to-br from-pink-500 to-pink-600 rounded-xl flex items-center justify-center mb-6 text-white">
+                            <i data-feather="heart" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 group-hover:text-pink-600 transition">Qualidade no Atendimento</h3>
+                        <p class="text-gray-600">Você tem o direito de receber um atendimento humanizado, respeitoso e de boa qualidade, com profissionais qualificados e equipamentos adequados.</p>
+                    </div>
+                </div>
+
+                <!-- Direito 3 -->
+                <div class="group card overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-indigo-600 to-purple-500 opacity-0 group-hover:opacity-5 transition-opacity"></div>
+                    <div class="relative">
+                        <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center mb-6 text-white">
+                            <i data-feather="book-open" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 group-hover:text-indigo-600 transition">Informação Completa</h3>
+                        <p class="text-gray-600">Você tem direito a informações claras sobre seu tratamento, diagnóstico, riscos, alternativas e prognóstico, em linguagem compreensível.</p>
+                    </div>
+                </div>
+
+                <!-- Direito 4 -->
+                <div class="group card overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-cyan-600 to-blue-500 opacity-0 group-hover:opacity-5 transition-opacity"></div>
+                    <div class="relative">
+                        <div class="w-12 h-12 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-xl flex items-center justify-center mb-6 text-white">
+                            <i data-feather="lock" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 group-hover:text-cyan-600 transition">Privacidade e Confidencialidade</h3>
+                        <p class="text-gray-600">Seus dados e informações médicas são confidenciais. Você tem direito à privacidade durante o atendimento e proteção de suas informações de saúde.</p>
+                    </div>
+                </div>
+
+                <!-- Direito 5 -->
+                <div class="group card overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-teal-600 to-green-500 opacity-0 group-hover:opacity-5 transition-opacity"></div>
+                    <div class="relative">
+                        <div class="w-12 h-12 bg-gradient-to-br from-teal-500 to-teal-600 rounded-xl flex items-center justify-center mb-6 text-white">
+                            <i data-feather="edit-2" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 group-hover:text-teal-600 transition">Consentimento Informado</h3>
+                        <p class="text-gray-600">Você tem direito a recusar tratamentos. Qualquer procedimento requer seu consentimento após esclarecimento dos riscos e benefícios.</p>
+                    </div>
+                </div>
+
+                <!-- Direito 6 -->
+                <div class="group card overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-green-600 to-emerald-500 opacity-0 group-hover:opacity-5 transition-opacity"></div>
+                    <div class="relative">
+                        <div class="w-12 h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center mb-6 text-white">
+                            <i data-feather="file-text" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-3 group-hover:text-green-600 transition">Acesso a Registros</h3>
+                        <p class="text-gray-600">Você tem direito de acessar, revisar e receber cópias de seus registros médicos e informações de saúde a qualquer tempo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- O que você pode fazer -->
+        <section class="bg-gradient-to-br from-slate-900 to-slate-800 py-20">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold text-white mb-16 text-center">Como Exercer seus Direitos</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Passo 1 -->
+                    <div class="bg-white bg-opacity-5 backdrop-blur-sm rounded-2xl p-8 border border-white border-opacity-10 hover:border-opacity-20 transition group">
+                        <div class="flex gap-4 mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                <i data-feather="alert-circle" class="w-8 h-8 text-white"></i>
+                            </div>
+                            <div>
+                                <span class="text-purple-300 text-sm font-semibold">Passo 1</span>
+                                <h3 class="text-xl font-bold text-white">Conheça seus Direitos</h3>
+                            </div>
+                        </div>
+                        <p class="text-gray-300">Leia e compreenda todos os seus direitos como paciente e usuário do SUS. Busque informações em órgãos de defesa e nas próprias unidades de saúde.</p>
+                    </div>
+
+                    <!-- Passo 2 -->
+                    <div class="bg-white bg-opacity-5 backdrop-blur-sm rounded-2xl p-8 border border-white border-opacity-10 hover:border-opacity-20 transition group">
+                        <div class="flex gap-4 mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                <i data-feather="speak" class="w-8 h-8 text-white"></i>
+                            </div>
+                            <div>
+                                <span class="text-indigo-300 text-sm font-semibold">Passo 2</span>
+                                <h3 class="text-xl font-bold text-white">Converse com os Profissionais</h3>
+                            </div>
+                        </div>
+                        <p class="text-gray-300">Comunique aos profissionais de saúde qualquer dúvida, preocupação ou violação de seus direitos. Solicite explicações claras sobre procedimentos.</p>
+                    </div>
+
+                    <!-- Passo 3 -->
+                    <div class="bg-white bg-opacity-5 backdrop-blur-sm rounded-2xl p-8 border border-white border-opacity-10 hover:border-opacity-20 transition group">
+                        <div class="flex gap-4 mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                <i data-feather="file-plus" class="w-8 h-8 text-white"></i>
+                            </div>
+                            <div>
+                                <span class="text-cyan-300 text-sm font-semibold">Passo 3</span>
+                                <h3 class="text-xl font-bold text-white">Registre Reclamações</h3>
+                            </div>
+                        </div>
+                        <p class="text-gray-300">Se seus direitos forem violados, faça uma reclamação formal na ouvidoria da unidade de saúde ou na secretaria municipal de saúde.</p>
+                    </div>
+
+                    <!-- Passo 4 -->
+                    <div class="bg-white bg-opacity-5 backdrop-blur-sm rounded-2xl p-8 border border-white border-opacity-10 hover:border-opacity-20 transition group">
+                        <div class="flex gap-4 mb-6">
+                            <div class="w-16 h-16 bg-gradient-to-br from-green-500 to-emerald-500 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                <i data-feather="help-circle" class="w-8 h-8 text-white"></i>
+                            </div>
+                            <div>
+                                <span class="text-green-300 text-sm font-semibold">Passo 4</span>
+                                <h3 class="text-xl font-bold text-white">Procure Órgãos de Defesa</h3>
+                            </div>
+                        </div>
+                        <p class="text-gray-300">Entre em contato com o Ministério Público, conselhos de saúde ou entidades de proteção ao consumidor se necessário.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Responsabilidades -->
+        <section class="container mx-auto px-4 py-20">
+            <h2 class="text-4xl font-bold mb-12 text-center">Suas Responsabilidades como Paciente</h2>
+            <div class="max-w-3xl mx-auto">
+                <div class="bg-white rounded-2xl shadow-lg p-8 md:p-12">
+                    <div class="space-y-6">
+                        <div class="flex gap-4 pb-6 border-b border-gray-200">
+                            <div class="w-10 h-10 bg-gradient-to-br from-purple-500 to-pink-500 rounded-lg flex items-center justify-center text-white font-bold flex-shrink-0">1</div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 mb-2">Informar dados pessoais com precisão</h3>
+                                <p class="text-gray-600">Forneça informações verdadeiras e completas sobre sua saúde aos profissionais de saúde</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 pb-6 border-b border-gray-200">
+                            <div class="w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-lg flex items-center justify-center text-white font-bold flex-shrink-0">2</div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 mb-2">Comparecer aos compromissos marcados</h3>
+                                <p class="text-gray-600">Chegue no horário das consultas e, se não puder ir, comunique com antecedência</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 pb-6 border-b border-gray-200">
+                            <div class="w-10 h-10 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-lg flex items-center justify-center text-white font-bold flex-shrink-0">3</div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 mb-2">Seguir orientações médicas</h3>
+                                <p class="text-gray-600">Cumpra com o tratamento prescrito e as recomendações dos profissionais de saúde</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 pb-6 border-b border-gray-200">
+                            <div class="w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-500 rounded-lg flex items-center justify-center text-white font-bold flex-shrink-0">4</div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 mb-2">Respeitar normas da unidade</h3>
+                                <p class="text-gray-600">Mantenha o respeito com funcionários, outros pacientes e siga as regras da instituição</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="w-10 h-10 bg-gradient-to-br from-orange-500 to-red-500 rounded-lg flex items-center justify-center text-white font-bold flex-shrink-0">5</div>
+                            <div>
+                                <h3 class="font-bold text-gray-900 mb-2">Proteger sua saúde</h3>
+                                <p class="text-gray-600">Participe ativamente do cuidado com sua saúde e de sua família</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Links de Ajuda -->
+        <section class="bg-gradient-to-br from-purple-50 to-pink-50 py-20">
+            <div class="container mx-auto px-4">
+                <h2 class="text-4xl font-bold mb-12 text-center">Onde Buscar Ajuda</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="card group">
+                        <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mb-6 text-white group-hover:scale-110 transition-transform">
+                            <i data-feather="phone" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-900 mb-2">Ouvidoria da UBS</h3>
+                        <p class="text-gray-600 text-sm mb-4">Apresente reclamações e sugestões diretamente na unidade de saúde mais próxima</p>
+                        <a href="mapa.html" class="text-purple-600 hover:text-purple-800 font-semibold text-sm">Localizar UBS →</a>
+                    </div>
+
+                    <div class="card group">
+                        <div class="w-12 h-12 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center mb-6 text-white group-hover:scale-110 transition-transform">
+                            <i data-feather="home" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-900 mb-2">Secretaria de Saúde</h3>
+                        <p class="text-gray-600 text-sm mb-4">Entre em contato com a administração municipal para questões mais gerais</p>
+                        <a href="tel:+554231234567" class="text-indigo-600 hover:text-indigo-800 font-semibold text-sm">Ligar →</a>
+                    </div>
+
+                    <div class="card group">
+                        <div class="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-6 text-white group-hover:scale-110 transition-transform">
+                            <i data-feather="shield" class="w-6 h-6"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-900 mb-2">Ministério Público</h3>
+                        <p class="text-gray-600 text-sm mb-4">Para questões mais graves sobre violação de direitos</p>
+                        <a href="https://www.mppr.mp.br" target="_blank" class="text-blue-600 hover:text-blue-800 font-semibold text-sm">Acessar →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="bg-gradient-to-r from-purple-600 to-pink-500 py-16 md:py-20">
+            <div class="container mx-auto px-4 text-center text-white">
+                <h2 class="text-4xl md:text-5xl font-bold mb-6">Conhece alguém cujos direitos foram violados?</h2>
+                <p class="text-xl mb-8 opacity-90 max-w-2xl mx-auto">Denuncie e ajude a melhorar os serviços de saúde para toda comunidade</p>
+                <div class="flex flex-wrap justify-center gap-4">
+                    <button class="btn bg-white text-purple-600 hover:bg-gray-100 font-semibold">
+                        <i data-feather="alert-circle" class="inline mr-2 w-5 h-5"></i>
+                        Fazer Denúncia
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <custom-footer></custom-footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            feather.replace();
+        });
+    </script>
+    <script src="js/animations.js"></script>
+</body>
+</html>

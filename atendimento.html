@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0F6BFF">
+    <meta name="description" content="Informações sobre os locais e horários de atendimento em Ponta Grossa">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="SaúdePG">
+    <link rel="manifest" href="manifest.json">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230F6BFF' width='100' height='100'/><text x='50' y='70' font-size='80' fill='white' font-weight='bold' text-anchor='middle'>S</text></svg>">
+    <title>Onde Ser Atendido - SaúdePG</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="components/install-prompt.js"></script>
+</head>
+<body class="bg-gray-50">
+    <install-prompt></install-prompt>
+    <custom-navbar></custom-navbar>
+    
+    <main>
+        <!-- Header Hero -->
+        <section class="bg-gradient-to-br from-blue-50 via-cyan-50 to-blue-50 py-8 md:py-16 lg:py-24">
+            <div class="container mx-auto px-4">
+                <a href="index.html" class="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 mb-4 md:mb-6 font-semibold transition text-sm md:text-base">
+                    <i data-feather="arrow-left"></i> Voltar
+                </a>
+                <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold mb-2 md:mb-4 leading-tight">
+                    Onde Ser <span class="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">Atendido?</span>
+                </h1>
+                <p class="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl">Conheça todos os tipos de atendimento disponíveis e como acessar os serviços de saúde de forma fácil e intuitiva.</p>
+            </div>
+        </section>
+
+        <!-- Fluxo de Atendimento -->
+        <section class="container mx-auto px-4 py-12 md:py-20">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-10 md:mb-16 text-center">Como Funciona o Atendimento</h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 relative">
+                <!-- Linha conectora -->
+                <div class="hidden md:block absolute top-20 left-12 right-12 h-1 bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400"></div>
+                
+                <!-- Passos -->
+                <div class="relative z-10">
+                    <div class="card hover:shadow-xl transition-all duration-300">
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center font-bold mx-auto mb-4 md:mb-6 text-white text-lg md:text-xl">1</div>
+                        <i data-feather="home" class="mx-auto mb-3 md:mb-4 text-blue-600 w-6 h-6 sm:w-8 sm:h-8"></i>
+                        <h3 class="font-bold text-gray-900 mb-2 text-center text-sm md:text-base">Procure a UBS</h3>
+                        <p class="text-gray-600 text-xs md:text-sm text-center">Localize a unidade de saúde mais próxima usando o mapa interativo</p>
+                    </div>
+                </div>
+
+                <div class="relative z-10">
+                    <div class="card hover:shadow-xl transition-all duration-300">
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-full flex items-center justify-center font-bold mx-auto mb-4 md:mb-6 text-white text-lg md:text-xl">2</div>
+                        <i data-feather="clipboard" class="mx-auto mb-3 md:mb-4 text-cyan-600 w-6 h-6 sm:w-8 sm:h-8"></i>
+                        <h3 class="font-bold text-gray-900 mb-2 text-center text-sm md:text-base">Documentos</h3>
+                        <p class="text-gray-600 text-xs md:text-sm text-center">Leve RG, CPF e comprovante de residência</p>
+                    </div>
+                </div>
+
+                <div class="relative z-10">
+                    <div class="card hover:shadow-xl transition-all duration-300">
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-teal-500 to-teal-600 rounded-full flex items-center justify-center font-bold mx-auto mb-4 md:mb-6 text-white text-lg md:text-xl">3</div>
+                        <i data-feather="edit-3" class="mx-auto mb-3 md:mb-4 text-teal-600 w-6 h-6 sm:w-8 sm:h-8"></i>
+                        <h3 class="font-bold text-gray-900 mb-2 text-center text-sm md:text-base">Cadastro</h3>
+                        <p class="text-gray-600 text-xs md:text-sm text-center">Registre-se no sistema de saúde</p>
+                    </div>
+                </div>
+
+                <div class="relative z-10">
+                    <div class="card hover:shadow-xl transition-all duration-300">
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center font-bold mx-auto mb-4 md:mb-6 text-white text-lg md:text-xl">4</div>
+                        <i data-feather="check-circle" class="mx-auto mb-3 md:mb-4 text-green-600 w-6 h-6 sm:w-8 sm:h-8"></i>
+                        <h3 class="font-bold text-gray-900 mb-2 text-center text-sm md:text-base">Atendimento</h3>
+                        <p class="text-gray-600 text-xs md:text-sm text-center">Receba seu atendimento de qualidade</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tipos de Atendimento -->
+        <section class="bg-gradient-to-br from-slate-900 to-slate-800 py-12 md:py-20">
+            <div class="container mx-auto px-4">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-10 md:mb-16 text-center">Tipos de Atendimento</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
+                    <!-- Atenção Básica -->
+                    <div class="group bg-white bg-opacity-5 backdrop-blur-sm rounded-xl md:rounded-2xl p-6 md:p-8 border border-white border-opacity-10 hover:bg-opacity-10 transition-all duration-300">
+                        <div class="flex items-start gap-3 md:gap-4 mb-4 md:mb-6">
+                            <div class="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                <i data-feather="heart" class="w-6 h-6 sm:w-7 sm:h-7 text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg sm:text-xl font-bold text-white mb-0.5 md:mb-1">Atenção Básica</h3>
+                                <p class="text-blue-200 text-xs sm:text-sm">Consultas e prevenção</p>
+                            </div>
+                        </div>
+                        <ul class="text-gray-300 text-xs sm:text-sm space-y-1.5 md:space-y-2">
+                            <li class="flex gap-2"><span class="text-blue-400 flex-shrink-0">✓</span> Consultas médicas e enfermagem</li>
+                            <li class="flex gap-2"><span class="text-blue-400 flex-shrink-0">✓</span> Vacinação e prevenção</li>
+                            <li class="flex gap-2"><span class="text-blue-400 flex-shrink-0">✓</span> Acompanhamento de doenças crônicas</li>
+                        </ul>
+                    </div>
+
+                    <!-- Pronto Atendimento -->
+                    <div class="group bg-white bg-opacity-5 backdrop-blur-sm rounded-xl md:rounded-2xl p-6 md:p-8 border border-white border-opacity-10 hover:bg-opacity-10 transition-all duration-300">
+                        <div class="flex items-start gap-3 md:gap-4 mb-4 md:mb-6">
+                            <div class="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                <i data-feather="alert-circle" class="w-6 h-6 sm:w-7 sm:h-7 text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg sm:text-xl font-bold text-white mb-0.5 md:mb-1">Pronto Atendimento</h3>
+                                <p class="text-orange-200 text-xs sm:text-sm">Emergências não graves</p>
+                            </div>
+                        </div>
+                        <ul class="text-gray-300 text-xs sm:text-sm space-y-1.5 md:space-y-2">
+                            <li class="flex gap-2"><span class="text-orange-400 flex-shrink-0">✓</span> Febre, gripe e resfriado</li>
+                            <li class="flex gap-2"><span class="text-orange-400 flex-shrink-0">✓</span> Dor e ferimentos</li>
+                            <li class="flex gap-2"><span class="text-orange-400 flex-shrink-0">✓</span> Reações alérgicas</li>
+                        </ul>
+                    </div>
+
+                    <!-- Especialidades -->
+                    <div class="group bg-white bg-opacity-5 backdrop-blur-sm rounded-xl md:rounded-2xl p-6 md:p-8 border border-white border-opacity-10 hover:bg-opacity-10 transition-all duration-300">
+                        <div class="flex items-start gap-3 md:gap-4 mb-4 md:mb-6">
+                            <div class="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                <i data-feather="users" class="w-6 h-6 sm:w-7 sm:h-7 text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg sm:text-xl font-bold text-white mb-0.5 md:mb-1">Especialidades</h3>
+                                <p class="text-cyan-200 text-xs sm:text-sm">Consultas especializadas</p>
+                            </div>
+                        </div>
+                        <ul class="text-gray-300 text-xs sm:text-sm space-y-1.5 md:space-y-2">
+                            <li class="flex gap-2"><span class="text-cyan-400 flex-shrink-0">✓</span> Cardiologia e dermatologia</li>
+                            <li class="flex gap-2"><span class="text-cyan-400 flex-shrink-0">✓</span> Oftalmologia e psicologia</li>
+                            <li class="flex gap-2"><span class="text-cyan-400 flex-shrink-0">✓</span> Nutrição e outros</li>
+                        </ul>
+                    </div>
+
+                    <!-- Exames -->
+                    <div class="group bg-white bg-opacity-5 backdrop-blur-sm rounded-xl md:rounded-2xl p-6 md:p-8 border border-white border-opacity-10 hover:bg-opacity-10 transition-all duration-300">
+                        <div class="flex items-start gap-3 md:gap-4 mb-4 md:mb-6">
+                            <div class="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-green-500 to-green-600 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
+                                <i data-feather="flask" class="w-6 h-6 sm:w-7 sm:h-7 text-white"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg sm:text-xl font-bold text-white mb-0.5 md:mb-1">Exames e Testes</h3>
+                                <p class="text-green-200 text-xs sm:text-sm">Coleta e realização</p>
+                            </div>
+                        </div>
+                        <ul class="text-gray-300 text-xs sm:text-sm space-y-1.5 md:space-y-2">
+                            <li class="flex gap-2"><span class="text-green-400 flex-shrink-0">✓</span> Testes sorológicos</li>
+                            <li class="flex gap-2"><span class="text-green-400 flex-shrink-0">✓</span> Testes rápidos de diagnóstico</li>
+                            <li class="flex gap-2"><span class="text-green-400 flex-shrink-0">✓</span> Verificação de pressão e glicemia</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Como Agendar -->
+        <section class="container mx-auto px-4 py-12 md:py-20">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-10 md:mb-16 text-center">Como Agendar uma Consulta</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                <div class="card group overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-blue-600 to-cyan-600 opacity-0 group-hover:opacity-10 transition-opacity"></div>
+                    <div class="relative">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg md:rounded-xl flex items-center justify-center mb-4 md:mb-6 text-white text-lg md:text-xl font-bold">1</div>
+                        <h3 class="text-lg sm:text-xl font-bold mb-2 md:mb-3 group-hover:text-blue-600 transition">Presencialmente</h3>
+                        <p class="text-sm md:text-base text-gray-600">Dirija-se à UBS de sua referência com RG e CPF durante o atendimento</p>
+                    </div>
+                </div>
+
+                <div class="card group overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-cyan-600 to-teal-600 opacity-0 group-hover:opacity-10 transition-opacity"></div>
+                    <div class="relative">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-lg md:rounded-xl flex items-center justify-center mb-4 md:mb-6 text-white text-lg md:text-xl font-bold">2</div>
+                        <h3 class="text-lg sm:text-xl font-bold mb-2 md:mb-3 group-hover:text-cyan-600 transition">Telefone</h3>
+                        <p class="text-sm md:text-base text-gray-600">Ligue para a UBS mais próxima e agende sua consulta</p>
+                    </div>
+                </div>
+
+                <div class="card group overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-teal-600 to-green-600 opacity-0 group-hover:opacity-10 transition-opacity"></div>
+                    <div class="relative">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-lg md:rounded-xl flex items-center justify-center mb-4 md:mb-6 text-white text-lg md:text-xl font-bold">3</div>
+                        <h3 class="text-lg sm:text-xl font-bold mb-2 md:mb-3 group-hover:text-green-600 transition">Aplicativo</h3>
+                        <p class="text-sm md:text-base text-gray-600">Use o aplicativo da prefeitura para agendamento online</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Documentos Necessários -->
+        <section class="bg-gradient-to-br from-blue-50 to-cyan-50 py-12 md:py-20">
+            <div class="container mx-auto px-4">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-center">Documentos Necessários</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 max-w-2xl mx-auto">
+                    <div class="flex gap-3 md:gap-4 p-4 md:p-6 bg-white rounded-lg md:rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center text-white font-bold flex-shrink-0 text-sm md:text-base">✓</div>
+                        <div>
+                            <h3 class="font-bold text-gray-900 mb-0.5 md:mb-1 text-sm md:text-base">RG ou Documento com Foto</h3>
+                            <p class="text-gray-600 text-xs md:text-sm">Documento de identidade válido</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3 md:gap-4 p-4 md:p-6 bg-white rounded-lg md:rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center text-white font-bold flex-shrink-0 text-sm md:text-base">✓</div>
+                        <div>
+                            <h3 class="font-bold text-gray-900 mb-0.5 md:mb-1 text-sm md:text-base">CPF</h3>
+                            <p class="text-gray-600 text-xs md:text-sm">Número do CPF ou comprovante</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3 md:gap-4 p-4 md:p-6 bg-white rounded-lg md:rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center text-white font-bold flex-shrink-0 text-sm md:text-base">✓</div>
+                        <div>
+                            <h3 class="font-bold text-gray-900 mb-0.5 md:mb-1 text-sm md:text-base">Comprovante de Residência</h3>
+                            <p class="text-gray-600 text-xs md:text-sm">Conta de água, energia ou telefone</p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-3 md:gap-4 p-4 md:p-6 bg-white rounded-lg md:rounded-xl shadow-md hover:shadow-lg transition-shadow">
+                        <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-green-500 to-green-600 rounded-lg flex items-center justify-center text-white font-bold flex-shrink-0 text-sm md:text-base">✓</div>
+                        <div>
+                            <h3 class="font-bold text-gray-900 mb-0.5 md:mb-1 text-sm md:text-base">Cartão SUS (se tiver)</h3>
+                            <p class="text-gray-600 text-xs md:text-sm">Facilita o processo de cadastro</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Horários -->
+        <section class="container mx-auto px-4 py-12 md:py-20">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-center">Horários de Atendimento</h2>
+            <div class="max-w-2xl mx-auto card overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead class="bg-gradient-to-r from-blue-500 to-cyan-500">
+                            <tr>
+                                <th class="text-left py-3 md:py-4 px-4 md:px-6 text-white font-bold text-sm md:text-base">Dia</th>
+                                <th class="text-left py-3 md:py-4 px-4 md:px-6 text-white font-bold text-sm md:text-base">Horário</th>
+                                <th class="text-left py-3 md:py-4 px-4 md:px-6 text-white font-bold text-sm md:text-base">Observações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="border-b border-gray-200 hover:bg-gray-50 transition">
+                                <td class="py-3 md:py-4 px-4 md:px-6 font-semibold text-gray-900 text-sm md:text-base">Seg-Sex</td>
+                                <td class="py-3 md:py-4 px-4 md:px-6 text-gray-700 text-sm md:text-base">07:00 às 17:00</td>
+                                <td class="py-3 md:py-4 px-4 md:px-6 text-gray-600 text-sm md:text-base">Atendimento normal</td>
+                            </tr>
+                            <tr class="border-b border-gray-200 bg-blue-50 hover:bg-blue-100 transition">
+                                <td class="py-3 md:py-4 px-4 md:px-6 font-semibold text-gray-900 text-sm md:text-base">Sábado</td>
+                                <td class="py-3 md:py-4 px-4 md:px-6 text-gray-700 text-sm md:text-base">08:00 às 12:00</td>
+                                <td class="py-3 md:py-4 px-4 md:px-6 text-gray-600 text-sm md:text-base">Unidades selecionadas</td>
+                            </tr>
+                            <tr class="bg-red-50 hover:bg-red-100 transition">
+                                <td class="py-3 md:py-4 px-4 md:px-6 font-semibold text-gray-900 text-sm md:text-base">Dom/Feriados</td>
+                                <td class="py-3 md:py-4 px-4 md:px-6 text-red-600 font-semibold text-sm md:text-base">Fechado</td>
+                                <td class="py-3 md:py-4 px-4 md:px-6 text-gray-600 text-sm md:text-base">Procure pronto atendimento</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="bg-gradient-to-r from-blue-600 to-cyan-500 py-8 md:py-16 lg:py-20">
+            <div class="container mx-auto px-4 text-center text-white">
+                <h2 class="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 md:mb-6">Pronto para seu atendimento?</h2>
+                <p class="text-base sm:text-lg md:text-xl mb-6 md:mb-8 opacity-90 max-w-2xl mx-auto">Localize a unidade mais próxima e agende sua consulta agora mesmo</p>
+                <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4">
+                    <a href="mapa.html" class="btn bg-white text-blue-600 hover:bg-gray-100 font-semibold w-full sm:w-auto text-center">
+                        <i data-feather="map" class="inline mr-2 w-5 h-5"></i>
+                        Ver Mapa
+                    </a>
+                    <a href="tel:+554231234567" class="btn bg-transparent border-2 border-white hover:bg-white hover:text-blue-600 font-semibold w-full sm:w-auto text-center">
+                        <i data-feather="phone" class="inline mr-2 w-5 h-5"></i>
+                        Ligar
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <custom-footer></custom-footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            feather.replace();
+        });
+    </script>
+    <script src="js/animations.js"></script>
+</body>
+</html>

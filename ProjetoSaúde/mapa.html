@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapa de Unidades UBS - SaúdePG</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <style>
+        #map {
+            border-radius: 1.5rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border: 2px solid rgba(15, 107, 255, 0.1);
+        }
+        
+        .leaflet-popup-content-wrapper {
+            border-radius: 16px !important;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2) !important;
+            border: 1px solid rgba(255, 255, 255, 0.2) !important;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(240, 249, 255, 1) 100%) !important;
+        }
+        
+        .unit-popup {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        .unit-popup h3 {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #0F6BFF 0%, #00D4FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .unit-popup p {
+            font-size: 14px;
+            margin: 6px 0;
+            color: #64748b;
+            line-height: 1.5;
+        }
+        
+        .unit-popup strong {
+            color: #1f2937;
+        }
+        
+        .legend {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            font-size: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        
+        .legend h4 {
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #0F6BFF 0%, #00D4FF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+            transition: all 0.3s ease;
+            padding: 8px;
+            border-radius: 8px;
+        }
+        
+        .legend-item:hover {
+            background: rgba(15, 107, 255, 0.05);
+            transform: translateX(5px);
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            opacity: 0.9;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+        }
+        
+        .leaflet-control-attribution {
+            display: none;
+        }
+        
+        .leaflet-marker-icon {
+            border-radius: 50%;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            border: 3px solid rgba(255, 255, 255, 0.8);
+            transition: all 0.3s ease;
+        }
+        
+        .leaflet-marker-icon:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+        }
+        
+        @media (max-width: 768px) {
+            #map {
+                border-radius: 1rem;
+            }
+            
+            .legend {
+                padding: 12px;
+                font-size: 12px;
+            }
+            
+            .legend-item {
+                gap: 8px;
+                padding: 6px;
+                margin: 8px 0;
+            }
+            
+            .leaflet-popup-content-wrapper {
+                border-radius: 12px !important;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            #map {
+                border-radius: 0.75rem;
+            }
+            
+            .legend {
+                padding: 10px;
+                font-size: 11px;
+            }
+            
+            .legend h4 {
+                margin-bottom: 8px;
+                font-size: 12px;
+            }
+            
+            .legend-color {
+                width: 16px;
+                height: 16px;
+            }
+            
+            .leaflet-popup-content-wrapper {
+                border-radius: 8px !important;
+            }
+            
+            .unit-popup h3 {
+                font-size: 14px;
+                margin-bottom: 8px;
+            }
+            
+            .unit-popup p {
+                font-size: 12px;
+                margin: 4px 0;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <custom-navbar></custom-navbar>
+    
+    <main>
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-br from-blue-50 via-cyan-50 to-blue-50 py-8 md:py-16 lg:py-24">
+            <div class="container mx-auto px-4">
+                <a href="index.html" class="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 mb-4 md:mb-6 font-semibold transition text-sm md:text-base">
+                    <i data-feather="arrow-left"></i> Voltar
+                </a>
+                <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold mb-3 md:mb-4 leading-tight">
+                    Mapa de <span class="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">Unidades UBS</span>
+                </h1>
+                <p class="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl">Localize as unidades de saúde mais próximas de sua residência e conheça os serviços disponíveis</p>
+            </div>
+        </section>
+
+        <!-- Map Container -->
+        <div class="container mx-auto px-4 py-8 md:py-16">
+            <div class="bg-white rounded-2xl md:rounded-3xl shadow-2xl overflow-hidden mb-8 md:mb-12">
+                <div id="map" class="h-56 sm:h-72 md:h-96 lg:h-[600px] w-full"></div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 md:-mt-8 relative z-10 mb-8 md:mb-12">
+                <div class="bg-white rounded-xl md:rounded-2xl shadow-lg p-6 md:p-8 border border-blue-100">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <p class="text-gray-600 font-semibold text-sm md:text-base mb-2">Total de Unidades</p>
+                            <p class="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent" id="total-units">0</p>
+                        </div>
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-100 to-cyan-100 rounded-xl md:rounded-2xl flex items-center justify-center">
+                            <i data-feather="map-pin" class="w-6 h-6 sm:w-8 sm:h-8 text-blue-600"></i>
+                        </div>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-500">Espalhadas por toda a cidade</p>
+                </div>
+
+                <div class="bg-white rounded-xl md:rounded-2xl shadow-lg p-6 md:p-8 border border-purple-100">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <p class="text-gray-600 font-semibold text-sm md:text-base mb-2">Áreas de Cobertura</p>
+                            <p class="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-purple-600 to-pink-500 bg-clip-text text-transparent" id="total-areas">0</p>
+                        </div>
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-purple-100 to-pink-100 rounded-xl md:rounded-2xl flex items-center justify-center">
+                            <i data-feather="layers" class="w-6 h-6 sm:w-8 sm:h-8 text-purple-600"></i>
+                        </div>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-500">Cobertura geográfica por região</p>
+                </div>
+
+                <div class="bg-white rounded-xl md:rounded-2xl shadow-lg p-6 md:p-8 border border-emerald-100">
+                    <div class="flex items-center justify-between mb-4">
+                        <div>
+                            <p class="text-gray-600 font-semibold text-sm md:text-base mb-2">Cobertura Municipal</p>
+                            <p class="text-3xl sm:text-4xl md:text-5xl font-bold bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">100%</p>
+                        </div>
+                        <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-emerald-100 to-teal-100 rounded-xl md:rounded-2xl flex items-center justify-center">
+                            <i data-feather="check-circle" class="w-6 h-6 sm:w-8 sm:h-8 text-emerald-600"></i>
+                        </div>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-500">Toda a população atendida</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Info Section -->
+        <section class="container mx-auto px-4 py-8 md:py-12">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-center">Como Usar o Mapa</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                <div class="card group">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl flex items-center justify-center mb-4 md:mb-6 text-white group-hover:scale-110 transition-transform">
+                        <i data-feather="search" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold mb-2 md:mb-3 group-hover:text-blue-600 transition">Clique para Explorar</h3>
+                    <p class="text-sm md:text-base text-gray-600">Clique em qualquer marcador no mapa para obter informações detalhadas sobre a unidade de saúde</p>
+                </div>
+
+                <div class="card group">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl flex items-center justify-center mb-4 md:mb-6 text-white group-hover:scale-110 transition-transform">
+                        <i data-feather="layers" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold mb-2 md:mb-3 group-hover:text-purple-600 transition">Áreas Coloridas</h3>
+                    <p class="text-sm md:text-base text-gray-600">As áreas coloridas mostram a cobertura de cada região da cidade. Cada cor representa um bairro diferente</p>
+                </div>
+
+                <div class="card group">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center mb-4 md:mb-6 text-white group-hover:scale-110 transition-transform">
+                        <i data-feather="phone" class="w-5 h-5 sm:w-6 sm:h-6"></i>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold mb-2 md:mb-3 group-hover:text-emerald-600 transition">Contate Diretamente</h3>
+                    <p class="text-sm md:text-base text-gray-600">Na informação do marcador você encontra telefone e horário de atendimento para contatar a unidade</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="bg-gradient-to-r from-blue-600 to-cyan-500 py-8 md:py-16 lg:py-20 mt-8 md:mt-12">
+            <div class="container mx-auto px-4 text-center text-white">
+                <h2 class="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 md:mb-6">Encontrou sua unidade?</h2>
+                <p class="text-base sm:text-lg md:text-xl mb-6 md:mb-8 opacity-90 max-w-2xl mx-auto">Agende sua consulta agora mesmo e receba atendimento de qualidade</p>
+                <div class="flex flex-col sm:flex-row flex-wrap justify-center gap-3 sm:gap-4">
+                    <a href="atendimento.html" class="btn bg-white text-blue-600 hover:bg-gray-100 font-semibold w-full sm:w-auto text-center">
+                        <i data-feather="calendar" class="inline mr-2 w-5 h-5"></i>
+                        Como Agendar
+                    </a>
+                    <a href="direitos.html" class="btn bg-transparent border-2 border-white hover:bg-white hover:text-blue-600 font-semibold w-full sm:w-auto text-center">
+                        <i data-feather="shield" class="inline mr-2 w-5 h-5"></i>
+                        Conheça seus Direitos
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <custom-footer></custom-footer>
+
+    <script src="js/mapa.js"></script>
+    <script src="js/animations.js"></script>
+</body>
+</html>
