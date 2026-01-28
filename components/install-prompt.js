@@ -78,6 +78,7 @@ class InstallPrompt extends HTMLElement {
     }
 
     renderIOSPrompt() {
+        const installarUrl = (window.APP_BASE_PATH || './') + 'instalar.html';
         this.innerHTML = `
             <div id="install-prompt" class="hidden fixed bottom-4 right-4 md:bottom-6 md:right-6 bg-white rounded-lg shadow-2xl p-4 md:p-6 max-w-sm z-50 border-l-4 border-green-600 animate-slide-up">
                 <div class="flex items-start justify-between gap-4">
@@ -97,7 +98,7 @@ class InstallPrompt extends HTMLElement {
                     </button>
                 </div>
                 <div class="flex gap-2 flex-col sm:flex-row">
-                    <a href="./instalar.html" class="flex-1 bg-gradient-to-r from-green-600 to-teal-500 text-white font-semibold py-2 md:py-3 px-4 rounded-lg hover:shadow-lg transition transform hover:scale-105 active:scale-95 text-center no-underline">
+                    <a href="${installarUrl}" class="flex-1 bg-gradient-to-r from-green-600 to-teal-500 text-white font-semibold py-2 md:py-3 px-4 rounded-lg hover:shadow-lg transition transform hover:scale-105 active:scale-95 text-center no-underline">
                         Ver Instruções
                     </a>
                     <button id="install-later" class="flex-1 bg-gray-100 text-gray-700 font-semibold py-2 md:py-3 px-4 rounded-lg hover:bg-gray-200 transition">
