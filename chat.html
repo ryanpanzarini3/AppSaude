@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <script src="base-config.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#0F6BFF">
+    <meta name="description" content="Chatbot de triagem para encontrar o departamento certo em SaúdePG">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="SaúdePG">
+    <link rel="manifest" href="" id="manifestLink">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230F6BFF' width='100' height='100'/><text x='50' y='70' font-size='80' fill='white' font-weight='bold' text-anchor='middle'>S</text></svg>">
+    <title>Triagem Online - SaúdePG</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="components/install-prompt.js"></script>
+    <script src="components/chatbot-triagem.js"></script>
+    <script>
+        // Definir o href do manifest dinâmicamente
+        document.getElementById('manifestLink').href = (window.APP_BASE_PATH || './') + 'manifest.json';
+    </script>
+    <style>
+        .chat-wrapper {
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .info-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            border-left: 4px solid #0F6BFF;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .info-card h3 {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+        }
+
+        .info-card p {
+            color: #6b7280;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .info-card svg {
+            width: 24px;
+            height: 24px;
+            color: #0F6BFF;
+            margin-bottom: 0.75rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <install-prompt></install-prompt>
+    <custom-navbar></custom-navbar>
+    
+    <main>
+        <!-- Hero Section -->
+        <section class="bg-gradient-to-br from-blue-50 via-cyan-50 to-blue-50 py-8 md:py-16">
+            <div class="container mx-auto px-4">
+                <a href="index.html" class="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 mb-4 md:mb-6 font-semibold transition text-sm md:text-base">
+                    <i data-feather="arrow-left"></i> Voltar
+                </a>
+                <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold mb-3 md:mb-4 leading-tight">
+                    <span class="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">Triagem Online</span>
+                </h1>
+                <p class="text-base sm:text-lg md:text-xl text-gray-600 max-w-2xl">Responda algumas perguntas e descubra o departamento certo para seu atendimento</p>
+            </div>
+        </section>
+
+        <!-- Chatbot Container -->
+        <div class="container mx-auto px-4 py-12 md:py-16">
+            <div class="chat-wrapper">
+                <chatbot-triagem></chatbot-triagem>
+            </div>
+        </div>
+
+        <!-- Info Section -->
+        <section class="container mx-auto px-4 py-12 md:py-16">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-center">Como Funciona</h2>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <i data-feather="message-square"></i>
+                    <h3>Responda Perguntas</h3>
+                    <p>Clique nas opções para responder perguntas sobre o tipo de atendimento que você precisa.</p>
+                </div>
+
+                <div class="info-card">
+                    <i data-feather="target"></i>
+                    <h3>Receba Orientação</h3>
+                    <p>Baseado em suas respostas, você receberá indicação do departamento e ramal corretos.</p>
+                </div>
+
+                <div class="info-card">
+                    <i data-feather="phone"></i>
+                    <h3>Entre em Contato</h3>
+                    <p>Use o ramal indicado para entrar em contato com o departamento desejado diretamente.</p>
+                </div>
+
+                <div class="info-card">
+                    <i data-feather="clock"></i>
+                    <h3>Horário de Atendimento</h3>
+                    <p>Estamos disponíveis de segunda a sexta, das 7h às 17h. Agende sua consulta!</p>
+                </div>
+
+                <div class="info-card">
+                    <i data-feather="zap"></i>
+                    <h3>Rápido e Fácil</h3>
+                    <p>Processo simples que leva menos de 2 minutos para você encontrar a orientação certa.</p>
+                </div>
+
+                <div class="info-card">
+                    <i data-feather="shield"></i>
+                    <h3>Sem Dados Pessoais</h3>
+                    <p>Não coletamos dados pessoais. Sua privacidade está garantida durante a triagem.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Horários Section -->
+        <section class="bg-gradient-to-r from-blue-600 to-cyan-500 py-8 md:py-16 mt-8 md:mt-12">
+            <div class="container mx-auto px-4 text-white">
+                <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 text-center">Informações de Contato</h2>
+                
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+                    <div class="text-center">
+                        <i data-feather="clock" class="w-10 h-10 md:w-12 md:h-12 mx-auto mb-4"></i>
+                        <h3 class="text-lg sm:text-xl font-bold mb-2">Horário de Funcionamento</h3>
+                        <p class="text-sm md:text-base opacity-90">Segunda a Sexta<br>7:00 às 17:00</p>
+                    </div>
+
+                    <div class="text-center">
+                        <i data-feather="phone" class="w-10 h-10 md:w-12 md:h-12 mx-auto mb-4"></i>
+                        <h3 class="text-lg sm:text-xl font-bold mb-2">Telefone Central</h3>
+                        <p class="text-sm md:text-base opacity-90">(42) 3229-8000<br>Ramal para triagem</p>
+                    </div>
+
+                    <div class="text-center">
+                        <i data-feather="map-pin" class="w-10 h-10 md:w-12 md:h-12 mx-auto mb-4"></i>
+                        <h3 class="text-lg sm:text-xl font-bold mb-2">Endereço</h3>
+                        <p class="text-sm md:text-base opacity-90">Ponta Grossa, PR<br>Ver mapa de unidades</p>
+                    </div>
+                </div>
+
+                <div class="mt-8 text-center">
+                    <a href="mapa.html" class="inline-flex items-center gap-2 bg-white text-blue-600 px-6 md:px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition">
+                        <i data-feather="map" class="w-5 h-5"></i>
+                        Ver Mapa de Unidades
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Perguntas Frequentes -->
+        <section class="container mx-auto px-4 py-12 md:py-16">
+            <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-center">Dúvidas Frequentes</h2>
+            
+            <div class="max-w-3xl mx-auto space-y-4">
+                <details class="bg-white rounded-lg p-6 border border-gray-200 cursor-pointer group">
+                    <summary class="font-bold text-gray-900 flex items-center justify-between">
+                        <span>Por que devo fazer a triagem?</span>
+                        <i data-feather="chevron-down" class="w-5 h-5 text-gray-600 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <p class="mt-4 text-gray-600 leading-relaxed">
+                        A triagem online ajuda você a encontrar o departamento e ramal corretos, economizando tempo na espera e garantindo que você fale com o profissional certo para sua necessidade.
+                    </p>
+                </details>
+
+                <details class="bg-white rounded-lg p-6 border border-gray-200 cursor-pointer group">
+                    <summary class="font-bold text-gray-900 flex items-center justify-between">
+                        <span>Meus dados estão seguros?</span>
+                        <i data-feather="chevron-down" class="w-5 h-5 text-gray-600 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <p class="mt-4 text-gray-600 leading-relaxed">
+                        Sim! A triagem não coleta dados pessoais. Funciona 100% no seu navegador sem enviar informações para servidores externos.
+                    </p>
+                </details>
+
+                <details class="bg-white rounded-lg p-6 border border-gray-200 cursor-pointer group">
+                    <summary class="font-bold text-gray-900 flex items-center justify-between">
+                        <span>Posso fazer a triagem a qualquer hora?</span>
+                        <i data-feather="chevron-down" class="w-5 h-5 text-gray-600 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <p class="mt-4 text-gray-600 leading-relaxed">
+                        Sim! A triagem está disponível 24 horas. Mas para entrar em contato com os departamentos, ligue durante o horário de funcionamento (7h às 17h, de segunda a sexta).
+                    </p>
+                </details>
+
+                <details class="bg-white rounded-lg p-6 border border-gray-200 cursor-pointer group">
+                    <summary class="font-bold text-gray-900 flex items-center justify-between">
+                        <span>E se não encontrar minha especialidade?</span>
+                        <i data-feather="chevron-down" class="w-5 h-5 text-gray-600 group-open:rotate-180 transition-transform"></i>
+                    </summary>
+                    <p class="mt-4 text-gray-600 leading-relaxed">
+                        Ligue para a central (42) 3229-8000 e fale com um atendente. Eles poderão ajudar você a encontrar o setor adequado ou orientar sobre referências.
+                    </p>
+                </details>
+            </div>
+        </section>
+    </main>
+
+    <custom-footer></custom-footer>
+
+    <script src="js/animations.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            feather.replace();
+        });
+    </script>
+</body>
+</html>
