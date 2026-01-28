@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <script src="base-config.js"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0F6BFF">
@@ -8,7 +9,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="SaúdePG">
-    <link rel="manifest" href="manifest.json">
+    <link rel="manifest" href="" id="manifestLink">
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230F6BFF' width='100' height='100'/><text x='50' y='70' font-size='80' fill='white' font-weight='bold' text-anchor='middle'>S</text></svg>">
     <title>Direitos do Paciente - SaúdePG</title>
     <link rel="stylesheet" href="style.css">
@@ -17,6 +18,10 @@
     <script src="components/navbar.js"></script>
     <script src="components/footer.js"></script>
     <script src="components/install-prompt.js"></script>
+    <script>
+        // Definir o href do manifest dinâmicamente
+        document.getElementById('manifestLink').href = (window.APP_BASE_PATH || './') + 'manifest.json';
+    </script>
 </head>
 <body class="bg-gray-50">
     <install-prompt></install-prompt>
