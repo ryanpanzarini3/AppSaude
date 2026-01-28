@@ -250,7 +250,7 @@ class CustomNavbar extends HTMLElement {
                     <a href="mapa.html" class="nav-link">Mapa</a>
                     <a href="atendimento.html" class="nav-link">Atendimento</a>
                     <a href="direitos.html" class="nav-link">Direitos</a>
-                    <a href="chat.html" class="nav-link">Triagem</a>
+                    <a href="chat.html" class="nav-link">Chat Online</a>
                     <a href="indicadores.html" class="nav-link">Indicadores</a>
                     <button class="install-menu-btn" id="installMenuBtn">
                         <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path><line x1="12" y1="7" x2="12" y2="13"></line><line x1="9" y1="10" x2="15" y2="10"></line></svg>
@@ -331,3 +331,4 @@ class CustomNavbar extends HTMLElement {
 }
 
 customElements.define('custom-navbar', CustomNavbar);
+
