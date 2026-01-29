@@ -5,19 +5,19 @@ class ChatbotTriagem extends HTMLElement {
         this.currentStep = 'welcome';
         this.userAnswers = {};
         this.conversationHistory = [];
-        this.unidades = []; // Array para armazenar as unidades
-        this.userLocation = null; // Localização do usuário
+        this.unidades = []; 
+        this.userLocation = null; 
         
-        // Estrutura de perguntas e respostas
+    
         this.chatFlow = {
             selecionarUnidade: {
                 message: 'Olá! Bem-vindo ao atendimento SaúdePG 👋\n\nPrimeiro, preciso saber em qual unidade você se atende. Qual é a sua unidade?',
-                options: [] // Será preenchido dinamicamente com as unidades
+                options: [] 
             },
             
             buscarUnidade: {
                 message: 'Localizando a unidade mais próxima...',
-                options: [] // Será preenchido dinamicamente
+                options: [] 
             },
             
             welcome: {
@@ -112,23 +112,23 @@ class ChatbotTriagem extends HTMLElement {
     }
 
     carregarUnidades() {
-        // Carregar as unidades do arquivo JSON
+        
         return fetch('./coordenadas-extraidas.json')
             .then(response => response.json())
             .then(data => {
                 this.unidades = data;
-                // Preencher as opções de unidades no chatFlow
+    
                 this.preencherOpcoesUnidades();
             })
             .catch(err => {
                 console.error('Erro ao carregar unidades:', err);
-                // Usar unidades padrão em caso de erro
+            
                 this.unidades = [];
             });
     }
 
     preencherOpcoesUnidades() {
-        // Criar opções com todas as unidades
+        
         const opcoes = this.unidades.map(unidade => ({
             text: unidade.nome,
             next: 'welcome',
@@ -136,7 +136,7 @@ class ChatbotTriagem extends HTMLElement {
             unidadeData: unidade
         }));
 
-        // Adicionar opção "Não sei" que permite buscar
+        
         opcoes.push({
             text: '� Não sei - Localizar unidade mais próxima',
             next: 'buscarUnidade',
@@ -535,7 +535,7 @@ class ChatbotTriagem extends HTMLElement {
         messageDiv.appendChild(content);
         messagesContainer.appendChild(messageDiv);
         
-        // Auto scroll para o final
+        
         setTimeout(() => {
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }, 100);
@@ -546,7 +546,7 @@ class ChatbotTriagem extends HTMLElement {
         optionsContainer.innerHTML = '';
 
         if (this.currentStep === 'resultado') {
-            // Mostrar resultado
+            
             const { dept, unidade, ramal } = this.userAnswers.result;
             
             const resultBox = document.createElement('div');
@@ -577,7 +577,7 @@ class ChatbotTriagem extends HTMLElement {
             resetBtn.addEventListener('click', () => this.startChat());
             optionsContainer.appendChild(resetBtn);
         } else if (this.currentStep === 'buscarUnidade') {
-            // Mostrar mensagem de carregamento
+            
             const messageDiv = document.createElement('div');
             messageDiv.className = 'location-message';
             messageDiv.innerHTML = `
@@ -589,10 +589,10 @@ class ChatbotTriagem extends HTMLElement {
             `;
             optionsContainer.appendChild(messageDiv);
             
-            // Iniciar geolocalização
+            
             this.buscarUnidadeProxima();
         } else {
-            // Mostrar opções como cards
+            
             options.forEach(option => {
                 const card = document.createElement('button');
                 card.className = 'option-card';
@@ -604,13 +604,13 @@ class ChatbotTriagem extends HTMLElement {
     }
 
     handleOption(option) {
-        // Mostrar resposta do usuário
+        
         this.showMessage('user', option.text);
 
-        // Se é seleção de unidade
+        
         if (this.currentStep === 'selecionarUnidade') {
             if (option.isBuscar) {
-                // Ir para tela de busca
+                
                 this.currentStep = option.next;
                 const nextStep = this.chatFlow[this.currentStep];
                 setTimeout(() => {
@@ -619,13 +619,13 @@ class ChatbotTriagem extends HTMLElement {
                 }, 500);
                 return;
             } else {
-                // Usar unidade selecionada
+                
                 this.userAnswers.unidade = option.selectedUnit;
                 this.userAnswers.ramalUnidade = option.unidadeData?.ramal;
             }
         }
 
-        // Atualizar estado
+        
         if (option.dept) {
             this.userAnswers.result = { 
                 dept: option.dept, 
@@ -634,23 +634,23 @@ class ChatbotTriagem extends HTMLElement {
             };
         }
 
-        // Ir para próximo passo
+        
         this.prosseguirParaProximoPasso(option);
     }
 
     prosseguirParaProximoPasso(option) {
-        // Ir para próximo passo
+        
         this.currentStep = option.next;
         const nextStep = this.chatFlow[this.currentStep];
 
         if (nextStep) {
-            // Mostrar mensagem do próximo passo com a unidade selecionada
+            
             let message = nextStep.message;
             if (this.userAnswers.unidade && message.includes('{unidade}')) {
                 message = message.replace('{unidade}', this.userAnswers.unidade);
             }
 
-            // Mostrar mensagem do próximo passo
+            
             setTimeout(() => {
                 this.showMessage('bot', message);
                 this.renderOptions(nextStep.options);
@@ -659,14 +659,14 @@ class ChatbotTriagem extends HTMLElement {
     }
 
     buscarUnidadeProxima() {
-        // Solicitar permissão de geolocalização
+        
         if ('geolocation' in navigator) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     const userLat = position.coords.latitude;
                     const userLng = position.coords.longitude;
                     
-                    // Encontrar unidade mais próxima
+                    
                     let unidadeProxima = this.unidades[0];
                     let menorDistancia = this.calcularDistancia(
                         userLat, 
@@ -692,10 +692,10 @@ class ChatbotTriagem extends HTMLElement {
                     this.showMessage('user', '📍 Não sei - Localizar unidade mais próxima');
                     this.showMessage('bot', `✅ Encontrei a unidade mais próxima: ${unidadeProxima.nome}`);
                     
-                    // Armazenar ramal da unidade
+                    
                     this.userAnswers.ramalUnidade = unidadeProxima.ramal;
                     
-                    // Prosseguir para próxima etapa
+                    
                     setTimeout(() => {
                         this.currentStep = 'welcome';
                         const nextStep = this.chatFlow['welcome'];
@@ -705,7 +705,7 @@ class ChatbotTriagem extends HTMLElement {
                     }, 1500);
                 },
                 (error) => {
-                    // Erro na geolocalização
+                    
                     console.error('Erro de geolocalização:', error);
                     
                     let errorMessage = '❌ Não conseguimos localizar sua posição.';
@@ -732,7 +732,7 @@ class ChatbotTriagem extends HTMLElement {
                     errorBox.innerHTML = `<strong>${errorMessage}</strong><p>${errorDetails}</p>`;
                     optionsContainer.appendChild(errorBox);
                     
-                    // Botão para voltar
+                   
                     const backBtn = document.createElement('button');
                     backBtn.className = 'reset-btn';
                     backBtn.textContent = '⬅️ Voltar para Seleção de Unidade';
@@ -742,7 +742,7 @@ class ChatbotTriagem extends HTMLElement {
                 }
             );
         } else {
-            // Geolocalização não disponível
+            
             this.showMessage('bot', '❌ Geolocalização não disponível neste navegador.');
             
             const optionsContainer = this.querySelector('#chatOptions');
@@ -753,7 +753,7 @@ class ChatbotTriagem extends HTMLElement {
             errorBox.innerHTML = '<strong>Seu navegador não suporta geolocalização.</strong><p>Por favor, selecione sua unidade manualmente ou use outro navegador.</p>';
             optionsContainer.appendChild(errorBox);
             
-            // Botão para voltar
+           
             const backBtn = document.createElement('button');
             backBtn.className = 'reset-btn';
             backBtn.textContent = '⬅️ Voltar para Seleção de Unidade';
@@ -766,8 +766,8 @@ class ChatbotTriagem extends HTMLElement {
 
 
     calcularDistancia(lat1, lng1, lat2, lng2) {
-        // Fórmula de Haversine para calcular distância entre dois pontos
-        const R = 6371; // Raio da Terra em km
+      
+        const R = 6371;
         const dLat = (lat2 - lat1) * Math.PI / 180;
         const dLng = (lng2 - lng1) * Math.PI / 180;
         const a = 
@@ -779,6 +779,7 @@ class ChatbotTriagem extends HTMLElement {
     }
 }
 
-// Registrar o componente
+
 customElements.define('chatbot-triagem', ChatbotTriagem);
+
 
