@@ -70,14 +70,14 @@ a:hover {
     color: var(--primary-cyan);
 }
 
-/* Container & Layout */
+
 .container {
     max-width: 1400px;
     margin: 0 auto;
     padding: 0 1rem;
 }
 
-/* Buttons */
+
 button, .btn {
     font-family: 'Inter', sans-serif;
     cursor: pointer;
@@ -120,7 +120,7 @@ button, .btn {
     background: #059669;
 }
 
-/* Cards */
+
 .card {
     background: white;
     border-radius: 1rem;
@@ -135,13 +135,13 @@ button, .btn {
     transform: translateY(-4px);
 }
 
-/* Focus & Accessibility */
+
 a:focus, button:focus {
     outline: 2px solid var(--primary-blue);
     outline-offset: 2px;
 }
 
-/* Custom scrollbar */
+
 ::-webkit-scrollbar {
     width: 10px;
     height: 10px;
@@ -160,7 +160,7 @@ a:focus, button:focus {
     background: var(--primary-cyan);
 }
 
-/* Gradients */
+
 .gradient-primary {
     background: linear-gradient(135deg, var(--primary-blue) 0%, var(--primary-cyan) 100%);
 }
@@ -169,14 +169,13 @@ a:focus, button:focus {
     background: linear-gradient(135deg, #1a1f3a 0%, #2d1b69 100%);
 }
 
-/* Responsive Images */
+
 img {
     max-width: 100%;
     height: auto;
     display: block;
 }
 
-/* Animations */
 @keyframes fadeIn {
     from {
         opacity: 0;
@@ -216,7 +215,7 @@ img {
     animation: slideIn 0.6s ease-out;
 }
 
-/* Utility Classes */
+
 .text-center {
     text-align: center;
 }
@@ -331,7 +330,7 @@ img {
     color: var(--danger);
 }
 
-/* Responsive Design */
+
 @media (max-width: 1024px) {
     h1 {
         font-size: 2rem;
@@ -387,13 +386,12 @@ img {
     .card {
         padding: 1.25rem;
     }
-    
-    /* Hero adjustments */
+
     .md\:grid-cols-2 {
         grid-template-columns: 1fr !important;
     }
     
-    /* Adjust padding for sections */
+
     .py-20 {
         padding-top: 2rem !important;
         padding-bottom: 2rem !important;
@@ -454,12 +452,12 @@ img {
         padding: 0 0.75rem;
     }
     
-    /* Hero section */
+
     .hidden.md\:block {
         display: none !important;
     }
     
-    /* Gap reduction for tight screens */
+
     .gap-4 {
         gap: 0.75rem !important;
     }
@@ -472,7 +470,7 @@ img {
         gap: 1rem !important;
     }
     
-    /* Text adjustments */
+  
     .text-5xl, .text-6xl {
         font-size: 1.75rem !important;
         line-height: 1.3;
@@ -490,7 +488,7 @@ img {
         font-size: 0.9rem !important;
     }
     
-    /* Flex adjustments */
+
     .flex-wrap {
         flex-direction: column;
     }
@@ -501,7 +499,7 @@ img {
     }
 }
 
-/* Extra small devices (< 360px) */
+
 @media (max-width: 360px) {
     h1 {
         font-size: 1.25rem;
@@ -523,4 +521,5 @@ img {
     .gap-4, .gap-8, .gap-12 {
         gap: 0.5rem !important;
     }
+
 }
