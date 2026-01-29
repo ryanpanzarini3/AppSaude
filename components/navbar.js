@@ -270,13 +270,13 @@ class CustomNavbar extends HTMLElement {
                 mobileMenu.classList.toggle('active');
             });
             
-            // Fecha ao clicar fora
+           
             document.addEventListener('click', () => {
                 mobileMenu.classList.remove('active');
             });
         }
 
-        // Gerenciar botão de instalação no menu
+ 
         if (installMenuBtn) {
             this.setupInstallButton(installMenuBtn);
         }
@@ -286,28 +286,28 @@ class CustomNavbar extends HTMLElement {
         let deferredPrompt = null;
         const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
 
-        // Detectar quando a PWA pode ser instalada (Android)
+    
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             deferredPrompt = e;
             btn.classList.remove('hidden');
         });
 
-        // Detectar instalação bem-sucedida
+  
         window.addEventListener('appinstalled', () => {
             btn.classList.add('hidden');
             deferredPrompt = null;
         });
 
-        // Clique no botão
+
         btn.addEventListener('click', async (e) => {
             e.preventDefault();
             
             if (isIOS) {
-                // Para iOS, redirecionar para página de instruções
+
                 window.location.href = './instalar.html';
             } else if (deferredPrompt) {
-                // Para Android, mostrar prompt nativo
+
                 deferredPrompt.prompt();
                 const { outcome } = await deferredPrompt.userChoice;
                 
@@ -319,7 +319,7 @@ class CustomNavbar extends HTMLElement {
             }
         });
 
-        // Verificar se já está instalado
+
         const isInStandaloneMode = () =>
             (window.navigator.standalone === true) ||
             (window.matchMedia('(display-mode: standalone)').matches);
@@ -331,4 +331,5 @@ class CustomNavbar extends HTMLElement {
 }
 
 customElements.define('custom-navbar', CustomNavbar);
+
 
