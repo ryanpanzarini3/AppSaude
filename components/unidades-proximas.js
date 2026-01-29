@@ -2,7 +2,7 @@ class UnidadesProximas extends HTMLElement {
     connectedCallback() {
         console.log('✓ UnidadesProximas connectedCallback chamado');
         
-        // Cria a estrutura HTML sem Shadow DOM (para compatibilidade com Leaflet)
+
         this.innerHTML = `
             <style>
                 .unidades-proximas-section {
@@ -657,10 +657,10 @@ class UnidadesProximas extends HTMLElement {
             </div>
         `;
         
-        // Carrega o mapa após o DOM estar pronto
+
         this.loadMap();
 
-        // Setup de listeners para geolocalização
+
         const nearestUBSBtn = this.querySelector('#nearestUBSBtn');
         const nearestUPABtn = this.querySelector('#nearestUPABtn');
         const modalClose = this.querySelector('#modalClose');
@@ -717,7 +717,7 @@ class UnidadesProximas extends HTMLElement {
     
     loadMap() {
         console.log('✓ loadMap chamado - aguardando Leaflet');
-        // Aguarda o Leaflet ser carregado
+
         const checkLeaflet = setInterval(() => {
             if (typeof L !== 'undefined') {
                 clearInterval(checkLeaflet);
@@ -725,8 +725,7 @@ class UnidadesProximas extends HTMLElement {
                 this.initMap();
             }
         }, 100);
-        
-        // Timeout de segurança
+
         setTimeout(() => {
             clearInterval(checkLeaflet);
             if (typeof L === 'undefined') {
@@ -744,26 +743,26 @@ class UnidadesProximas extends HTMLElement {
             return;
         }
         
-        // Centro da cidade de Ponta Grossa
+
         const center = [-25.138488, -50.242180];
         
-        // Cria o mapa
+
         console.log('Criando mapa com Leaflet...');
         const map = L.map('mapa-unidades').setView(center, 12);
         console.log('✓ Mapa criado com sucesso');
         
-        // Adiciona o tile layer do OpenStreetMap
+
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '© OpenStreetMap contributors',
             maxZoom: 19
         }).addTo(map);
         
-        // Carrega os dados de unidades
+
         this.addUnitsToMap(map);
     }
     
     addUnitsToMap(map) {
-        // Dados das 47 UBS
+
         const ubsUnidades = [
             { id: 1, nome: "Abrahão Federmann", lat: -25.0883606, lng: -50.1435159, tipo: "UBS" },
             { id: 2, nome: "Adam Polan", lat: -25.068633, lng: -50.1762305, tipo: "UBS" },
@@ -814,14 +813,14 @@ class UnidadesProximas extends HTMLElement {
             { id: 47, nome: "Zilda Arns", lat: -25.0585141, lng: -50.1633409, tipo: "UBS" }
         ];
         
-        // Dados das 3 UPA
+
         const upaUnidades = [
             { id: 1, nome: "UPA Uvaranas", lat: -25.0910575, lng: -50.1109483, tipo: "UPA" },
             { id: 2, nome: "UPA Santana", lat: -25.102523, lng: -50.1608855, tipo: "UPA" },
             { id: 3, nome: "UPA Santa Paula", lat: -25.102144, lng: -50.201616, tipo: "UPA" }
         ];
         
-        // Ícone customizado para UBS
+
         const ubsIcon = L.divIcon({
             html: '<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="14" fill="#0F6BFF" stroke="white" stroke-width="2"/><path d="M16 9v14M9 16h14" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>',
             iconSize: [32, 32],
@@ -830,7 +829,7 @@ class UnidadesProximas extends HTMLElement {
             className: 'ubs-marker'
         });
         
-        // Ícone customizado para UPA
+
         const upaIcon = L.divIcon({
             html: '<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="14" fill="#ef4444" stroke="white" stroke-width="2"/><path d="M16 9l3.5 10h10.5l-8.5 6.5 3.5 10-10-7.5-10 7.5 3.5-10-8.5-6.5h10.5z" fill="white"/></svg>',
             iconSize: [32, 32],
@@ -839,14 +838,14 @@ class UnidadesProximas extends HTMLElement {
             className: 'upa-marker'
         });
         
-        // Adiciona marcadores das UBS
+
         ubsUnidades.forEach(unit => {
             L.marker([unit.lat, unit.lng], { icon: ubsIcon })
                 .bindPopup(`<strong>${unit.nome}</strong><br><small>UBS - Unidade Básica de Saúde</small>`)
                 .addTo(map);
         });
         
-        // Adiciona marcadores das UPA
+
         upaUnidades.forEach(unit => {
             L.marker([unit.lat, unit.lng], { icon: upaIcon })
                 .bindPopup(`<strong>${unit.nome}</strong><br><small>UPA - Unidade de Pronto Atendimento (24h)</small>`)
@@ -890,7 +889,7 @@ class UnidadesProximas extends HTMLElement {
         }
 
         console.log('Solicitando permissão de geolocalização...');
-        // Mostrar feedback imediato
+
         modalBody.innerHTML = `
             <div style="padding: 2rem; text-align: center;">
                 <p style="font-size: 1rem; color: #475569; margin-bottom: 1rem;">Solicitando sua localização...</p>
@@ -998,7 +997,7 @@ class UnidadesProximas extends HTMLElement {
         }
 
         console.log('Solicitando permissão de geolocalização...');
-        // Mostrar feedback imediato
+
         modalBody.innerHTML = `
             <div style="padding: 2rem; text-align: center;">
                 <p style="font-size: 1rem; color: #475569; margin-bottom: 1rem;">Solicitando sua localização...</p>
@@ -1071,7 +1070,7 @@ class UnidadesProximas extends HTMLElement {
     }
 
     calculateNearest(userLat, userLng) {
-        // Dados das 47 UBS
+
         const ubsUnidades = [
             { id: 1, nome: "Abrahão Federmann", bairro: "Centro", endereco: "Rua Quinze De Setembro – em Frente 260", ramal: "3220-1020", lat: -25.0883606, lng: -50.1435159, tipo: "UBS" },
             { id: 2, nome: "Adam Polan", bairro: "Oficinas", endereco: "Rua Alberto De Oliveira", ramal: "3220-1020", lat: -25.068633, lng: -50.1762305, tipo: "UBS" },
@@ -1122,17 +1121,16 @@ class UnidadesProximas extends HTMLElement {
             { id: 47, nome: "Zilda Arns", bairro: "Piraí", endereco: "Rua Aguinaldo Guimarães Da Cunha S/N", ramal: "3901-3508", lat: -25.0585141, lng: -50.1633409, tipo: "UBS" }
         ];
 
-        // Dados das 3 UPA
+
         const upaUnidades = [
             { id: 1, nome: "UPA Uvaranas", tipo: "UPA", endereco: "R. Cmte Paulo P Schmidt, 15 - Uvaranas, Ponta Grossa - PR, 84031-029", bairro: "Uvaranas", ramal: "3901-2500", lat: -25.0910575, lng: -50.1109483 },
             { id: 2, nome: "UPA Santana", tipo: "UPA", endereco: "R. Dr. Paula Xavier - Centro, Ponta Grossa - PR, 84040-120", bairro: "Santana", ramal: "3901-2600", lat: -25.102523, lng: -50.1608855 },
             { id: 3, nome: "UPA Santa Paula", tipo: "UPA", endereco: "R. Nicolau Kluppel Neto, 1645 - Santa Paula, Ponta Grossa - PR, 84061-000", bairro: "Santa Paula", ramal: "3901-2700", lat: -25.102144, lng: -50.201616 }
         ];
 
-        // Combina todas as unidades
         const allUnits = [...ubsUnidades, ...upaUnidades];
 
-        // Calcula distância para cada unidade e encontra a mais próxima
+
         let nearest = null;
         let minDistance = Infinity;
 
@@ -1166,7 +1164,7 @@ class UnidadesProximas extends HTMLElement {
         searchBtn.disabled = true;
         searchBtn.classList.add('loading');
 
-        // Usar API Nominatim do OpenStreetMap para geocodificar o endereço
+
         const query = encodeURIComponent(`${address}, Ponta Grossa, Paraná, Brasil`);
         const nominatimUrl = `https://nominatim.openstreetmap.org/search?format=json&q=${query}&limit=1`;
 
@@ -1194,11 +1192,11 @@ class UnidadesProximas extends HTMLElement {
 
                 console.log(`Coordenadas encontradas: ${addressLat}, ${addressLng}`);
 
-                // Encontrar a UBS mais próxima desse endereço
+
                 const nearestUBS = this.calculateNearestUBS(addressLat, addressLng);
                 const nearestUPA = this.calculateNearestUPA(addressLat, addressLng);
 
-                // Mostrar a UBS (mais próxima por padrão)
+
                 let html = `
                     <div class="unit-info" style="margin-bottom: 1.5rem; padding: 1rem; background: #f3f4f6; border-radius: 0.5rem;">
                         <div style="color: #6b7280; font-size: 0.9rem; margin-bottom: 0.5rem;">
@@ -1216,7 +1214,7 @@ class UnidadesProximas extends HTMLElement {
                     </div>
                 `;
 
-                // Mostrar UBS mais próxima
+
                 html += `
                     <div class="unit-card" style="margin-bottom: 1rem;">
                         <div class="unit-name">${nearestUBS.nome}</div>
@@ -1241,7 +1239,7 @@ class UnidadesProximas extends HTMLElement {
                     </div>
                 `;
 
-                // Mostrar UPA mais próxima
+
                 html += `
                     <div class="unit-card upa" style="margin-bottom: 1.5rem;">
                         <div class="unit-name">${nearestUPA.nome}</div>
@@ -1306,7 +1304,7 @@ class UnidadesProximas extends HTMLElement {
     }
 
     calculateNearestUBS(userLat, userLng) {
-        // Dados das 47 UBS
+
         const ubsUnidades = [
             { id: 1, nome: "Abrahão Federmann", bairro: "Centro", endereco: "Rua Quinze De Setembro – em Frente 260", ramal: "3220-1020", lat: -25.0883606, lng: -50.1435159, tipo: "UBS" },
             { id: 2, nome: "Adam Polan", bairro: "Oficinas", endereco: "Rua Alberto De Oliveira", ramal: "3220-1020", lat: -25.068633, lng: -50.1762305, tipo: "UBS" },
@@ -1372,7 +1370,7 @@ class UnidadesProximas extends HTMLElement {
     }
 
     calculateNearestUPA(userLat, userLng) {
-        // Dados das 3 UPA
+
         const upaUnidades = [
             { id: 1, nome: "UPA Uvaranas", tipo: "UPA", endereco: "Rua Uvaranas, 100", bairro: "Uvaranas", ramal: "3901-2500", lat: -25.0910575, lng: -50.1109483 },
             { id: 2, nome: "UPA Santana", tipo: "UPA", endereco: "Rua Santana, 200", bairro: "Santana", ramal: "3901-2600", lat: -25.102523, lng: -50.1608855 },
@@ -1394,7 +1392,7 @@ class UnidadesProximas extends HTMLElement {
     }
 
     calculateDistance(lat1, lng1, lat2, lng2) {
-        // Fórmula de Haversine para calcular distância entre dois pontos no globo
+
         const R = 6371; // Raio da Terra em km
         const dLat = (lat2 - lat1) * Math.PI / 180;
         const dLng = (lng2 - lng1) * Math.PI / 180;
@@ -1404,7 +1402,7 @@ class UnidadesProximas extends HTMLElement {
                   Math.sin(dLng / 2) * Math.sin(dLng / 2);
         
         const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
-        return R * c; // Distância em km
+        return R * c; 
     }
 
     showNearestResult(unit, userLat, userLng, modal, modalBody, title, modalTitle) {
@@ -1465,3 +1463,4 @@ class UnidadesProximas extends HTMLElement {
 }
 
 customElements.define('unidades-proximas', UnidadesProximas);
+
