@@ -5,11 +5,23 @@ class ChatbotTriagem extends HTMLElement {
         this.currentStep = 'welcome';
         this.userAnswers = {};
         this.conversationHistory = [];
+        this.unidades = []; // Array para armazenar as unidades
+        this.userLocation = null; // Localização do usuário
         
         // Estrutura de perguntas e respostas
         this.chatFlow = {
+            selecionarUnidade: {
+                message: 'Olá! Bem-vindo ao atendimento SaúdePG 👋\n\nPrimeiro, preciso saber em qual unidade você se atende. Qual é a sua unidade?',
+                options: [] // Será preenchido dinamicamente com as unidades
+            },
+            
+            buscarUnidade: {
+                message: 'Localizando a unidade mais próxima...',
+                options: [] // Será preenchido dinamicamente
+            },
+            
             welcome: {
-                message: 'Olá! Bem-vindo ao atendimento SaúdePG 👋\n\nEu vou ajudar você a encontrar o departamento certo. Por favor, selecione qual tipo de atendimento você procura:',
+                message: 'Ótimo! Você se atende na unidade {unidade}.\n\nAgora vou ajudar você a encontrar o departamento certo. Por favor, selecione qual tipo de atendimento você procura:',
                 options: [
                     { text: 'Consulta Clínica', next: 'consulta_clinica' },
                     { text: 'Odontologia', next: 'odontologia' },
@@ -23,64 +35,64 @@ class ChatbotTriagem extends HTMLElement {
             consulta_clinica: {
                 message: 'Ótimo! Você precisa de uma consulta clínica.\n\nQual especialidade você procura?',
                 options: [
-                    { text: 'Clínica Geral', next: 'resultado', dept: 'Clínica Geral', ramal: 101 },
-                    { text: 'Cardiologia', next: 'resultado', dept: 'Cardiologia', ramal: 102 },
-                    { text: 'Pneumologia', next: 'resultado', dept: 'Pneumologia', ramal: 103 },
-                    { text: 'Dermatologia', next: 'resultado', dept: 'Dermatologia', ramal: 104 },
-                    { text: 'Reumatologia', next: 'resultado', dept: 'Reumatologia', ramal: 105 }
+                    { text: 'Clínica Geral', next: 'resultado', dept: 'Clínica Geral' },
+                    { text: 'Cardiologia', next: 'resultado', dept: 'Cardiologia' },
+                    { text: 'Pneumologia', next: 'resultado', dept: 'Pneumologia' },
+                    { text: 'Dermatologia', next: 'resultado', dept: 'Dermatologia' },
+                    { text: 'Reumatologia', next: 'resultado', dept: 'Reumatologia' }
                 ]
             },
             
             odontologia: {
                 message: 'Você selecionou Odontologia! 🦷\n\nQual tipo de atendimento odontológico você precisa?',
                 options: [
-                    { text: 'Limpeza e Prevenção', next: 'resultado', dept: 'Odontologia - Preventiva', ramal: 201 },
-                    { text: 'Tratamento de Cárie', next: 'resultado', dept: 'Odontologia - Restauradora', ramal: 202 },
-                    { text: 'Endodontia (Canal)', next: 'resultado', dept: 'Odontologia - Endodontia', ramal: 203 },
-                    { text: 'Periodontia (Gengiva)', next: 'resultado', dept: 'Odontologia - Periodontia', ramal: 204 },
-                    { text: 'Extração Dentária', next: 'resultado', dept: 'Odontologia - Cirurgia', ramal: 205 }
+                    { text: 'Limpeza e Prevenção', next: 'resultado', dept: 'Odontologia - Preventiva' },
+                    { text: 'Tratamento de Cárie', next: 'resultado', dept: 'Odontologia - Restauradora' },
+                    { text: 'Endodontia (Canal)', next: 'resultado', dept: 'Odontologia - Endodontia' },
+                    { text: 'Periodontia (Gengiva)', next: 'resultado', dept: 'Odontologia - Periodontia' },
+                    { text: 'Extração Dentária', next: 'resultado', dept: 'Odontologia - Cirurgia' }
                 ]
             },
             
             urgencia: {
                 message: 'Você precisa de atendimento de urgência! 🚨\n\nQual é seu sintoma?',
                 options: [
-                    { text: 'Dor intensa', next: 'resultado', dept: 'Urgência/Emergência', ramal: 301 },
-                    { text: 'Febre alta', next: 'resultado', dept: 'Urgência/Emergência', ramal: 301 },
-                    { text: 'Dificuldade para respirar', next: 'resultado', dept: 'Urgência/Emergência', ramal: 301 },
-                    { text: 'Trauma/Acidente', next: 'resultado', dept: 'Urgência/Emergência', ramal: 301 },
-                    { text: 'Outro', next: 'resultado', dept: 'Urgência/Emergência', ramal: 301 }
+                    { text: 'Dor intensa', next: 'resultado', dept: 'Urgência/Emergência' },
+                    { text: 'Febre alta', next: 'resultado', dept: 'Urgência/Emergência' },
+                    { text: 'Dificuldade para respirar', next: 'resultado', dept: 'Urgência/Emergência' },
+                    { text: 'Trauma/Acidente', next: 'resultado', dept: 'Urgência/Emergência' },
+                    { text: 'Outro', next: 'resultado', dept: 'Urgência/Emergência' }
                 ]
             },
             
             vacinacao: {
                 message: 'Você procura por vacinação! 💉\n\nQual vacina você precisa?',
                 options: [
-                    { text: 'Rotina de crianças', next: 'resultado', dept: 'Vacinação Infantil', ramal: 401 },
-                    { text: 'Adultos', next: 'resultado', dept: 'Vacinação Adulta', ramal: 402 },
-                    { text: 'Idosos', next: 'resultado', dept: 'Vacinação Idosos', ramal: 402 },
-                    { text: 'Reforço COVID', next: 'resultado', dept: 'Vacinação COVID', ramal: 403 },
-                    { text: 'Influenza', next: 'resultado', dept: 'Vacinação Influenza', ramal: 403 }
+                    { text: 'Rotina de crianças', next: 'resultado', dept: 'Vacinação Infantil' },
+                    { text: 'Adultos', next: 'resultado', dept: 'Vacinação Adulta' },
+                    { text: 'Idosos', next: 'resultado', dept: 'Vacinação Idosos' },
+                    { text: 'Reforço COVID', next: 'resultado', dept: 'Vacinação COVID' },
+                    { text: 'Influenza', next: 'resultado', dept: 'Vacinação Influenza' }
                 ]
             },
             
             prenatal: {
                 message: 'Você procura acompanhamento pré-natal! 🤰\n\nQual é a semana de gestação?',
                 options: [
-                    { text: '1º Trimestre', next: 'resultado', dept: 'Pré-natal - 1º Trimestre', ramal: 501 },
-                    { text: '2º Trimestre', next: 'resultado', dept: 'Pré-natal - 2º Trimestre', ramal: 502 },
-                    { text: '3º Trimestre', next: 'resultado', dept: 'Pré-natal - 3º Trimestre', ramal: 503 },
-                    { text: 'Não sei', next: 'resultado', dept: 'Pré-natal - Geral', ramal: 501 }
+                    { text: '1º Trimestre', next: 'resultado', dept: 'Pré-natal - 1º Trimestre' },
+                    { text: '2º Trimestre', next: 'resultado', dept: 'Pré-natal - 2º Trimestre' },
+                    { text: '3º Trimestre', next: 'resultado', dept: 'Pré-natal - 3º Trimestre' },
+                    { text: 'Não sei', next: 'resultado', dept: 'Pré-natal - Geral' }
                 ]
             },
             
             pediatria: {
                 message: 'Você procura atendimento pediátrico! 👶\n\nQual é o tipo de atendimento?',
                 options: [
-                    { text: 'Consulta de Rotina', next: 'resultado', dept: 'Pediatria - Geral', ramal: 601 },
-                    { text: 'Puericultura', next: 'resultado', dept: 'Pediatria - Puericultura', ramal: 602 },
-                    { text: 'Vacinação', next: 'resultado', dept: 'Vacinação Infantil', ramal: 401 },
-                    { text: 'Doença Aguda', next: 'resultado', dept: 'Pediatria - Urgência', ramal: 603 }
+                    { text: 'Consulta de Rotina', next: 'resultado', dept: 'Pediatria - Geral' },
+                    { text: 'Puericultura', next: 'resultado', dept: 'Pediatria - Puericultura' },
+                    { text: 'Vacinação', next: 'resultado', dept: 'Vacinação Infantil' },
+                    { text: 'Doença Aguda', next: 'resultado', dept: 'Pediatria - Urgência' }
                 ]
             },
             
@@ -94,6 +106,45 @@ class ChatbotTriagem extends HTMLElement {
     connectedCallback() {
         this.render();
         this.setupListeners();
+        this.carregarUnidades().then(() => {
+            this.startChat();
+        });
+    }
+
+    carregarUnidades() {
+        // Carregar as unidades do arquivo JSON
+        return fetch('./coordenadas-extraidas.json')
+            .then(response => response.json())
+            .then(data => {
+                this.unidades = data;
+                // Preencher as opções de unidades no chatFlow
+                this.preencherOpcoesUnidades();
+            })
+            .catch(err => {
+                console.error('Erro ao carregar unidades:', err);
+                // Usar unidades padrão em caso de erro
+                this.unidades = [];
+            });
+    }
+
+    preencherOpcoesUnidades() {
+        // Criar opções com todas as unidades
+        const opcoes = this.unidades.map(unidade => ({
+            text: unidade.nome,
+            next: 'welcome',
+            selectedUnit: unidade.nome,
+            unidadeData: unidade
+        }));
+
+        // Adicionar opção "Não sei" que permite buscar
+        opcoes.push({
+            text: '� Não sei - Localizar unidade mais próxima',
+            next: 'buscarUnidade',
+            selectedUnit: 'buscar',
+            isBuscar: true
+        });
+
+        this.chatFlow.selecionarUnidade.options = opcoes;
     }
 
     render() {
@@ -180,11 +231,43 @@ class ChatbotTriagem extends HTMLElement {
 
                 .chat-options {
                     padding: 1.5rem;
-                    display: flex;
-                    flex-direction: column;
-                    gap: 0.75rem;
-                    background: white;
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 1rem;
+                    background: #f9fafb;
                     border-top: 1px solid #e5e7eb;
+                    max-height: 400px;
+                    overflow-y: auto;
+                }
+
+                .option-card {
+                    padding: 1.5rem;
+                    border: 2px solid #e5e7eb;
+                    background: white;
+                    border-radius: 1rem;
+                    cursor: pointer;
+                    font-weight: 600;
+                    font-size: 0.9rem;
+                    transition: all 0.3s ease;
+                    color: #1f2937;
+                    text-align: center;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    min-height: 80px;
+                    word-wrap: break-word;
+                }
+
+                .option-card:hover {
+                    border-color: #0F6BFF;
+                    background: #f0f9ff;
+                    transform: translateY(-5px);
+                    box-shadow: 0 10px 20px rgba(15, 107, 255, 0.1);
+                }
+
+                .option-card:active {
+                    transform: translateY(-2px);
+                    box-shadow: 0 5px 10px rgba(15, 107, 255, 0.15);
                 }
 
                 .option-btn {
@@ -208,6 +291,91 @@ class ChatbotTriagem extends HTMLElement {
 
                 .option-btn:active {
                     transform: scale(0.98);
+                }
+
+                .search-container {
+                    padding: 1.5rem;
+                    display: flex;
+                    flex-direction: column;
+                    gap: 1rem;
+                    background: white;
+                    border-top: 1px solid #e5e7eb;
+                }
+
+                .search-input {
+                    padding: 0.75rem 1rem;
+                    border: 2px solid #e5e7eb;
+                    border-radius: 0.75rem;
+                    font-size: 1rem;
+                    width: 100%;
+                    transition: all 0.3s ease;
+                }
+
+                .search-input:focus {
+                    outline: none;
+                    border-color: #0F6BFF;
+                    box-shadow: 0 0 0 3px rgba(15, 107, 255, 0.1);
+                }
+
+                .search-results {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.5rem;
+                    max-height: 300px;
+                    overflow-y: auto;
+                }
+
+                .search-result-item {
+                    padding: 0.75rem 1rem;
+                    border: 1px solid #e5e7eb;
+                    border-radius: 0.5rem;
+                    background: white;
+                    cursor: pointer;
+                    transition: all 0.2s ease;
+                }
+
+                .search-result-item:hover {
+                    border-color: #0F6BFF;
+                    background: #f0f9ff;
+                }
+
+                .no-results {
+                    padding: 1rem;
+                    text-align: center;
+                    color: #9ca3af;
+                    font-size: 0.9rem;
+                }
+
+                .loading-spinner {
+                    display: inline-block;
+                    width: 20px;
+                    height: 20px;
+                    border: 3px solid rgba(15, 107, 255, 0.3);
+                    border-radius: 50%;
+                    border-top-color: #0F6BFF;
+                    animation: spin 0.6s linear infinite;
+                }
+
+                @keyframes spin {
+                    to { transform: rotate(360deg); }
+                }
+
+                .location-message {
+                    padding: 1.5rem;
+                    text-align: center;
+                    color: #6b7280;
+                    font-size: 0.95rem;
+                    line-height: 1.6;
+                }
+
+                .location-error {
+                    padding: 1.5rem;
+                    background: #fee2e2;
+                    border: 1px solid #fca5a5;
+                    border-radius: 0.75rem;
+                    color: #991b1b;
+                    text-align: center;
+                    margin: 1rem 0;
                 }
 
                 .resultado-box {
@@ -310,7 +478,14 @@ class ChatbotTriagem extends HTMLElement {
 
                     .chat-options {
                         padding: 1rem;
-                        gap: 0.5rem;
+                        gap: 0.75rem;
+                        grid-template-columns: 1fr;
+                    }
+
+                    .option-card {
+                        padding: 1rem;
+                        font-size: 0.85rem;
+                        min-height: 70px;
                     }
 
                     .option-btn {
@@ -341,11 +516,11 @@ class ChatbotTriagem extends HTMLElement {
     }
 
     startChat() {
-        this.currentStep = 'welcome';
+        this.currentStep = 'selecionarUnidade';
         this.userAnswers = {};
         this.conversationHistory = [];
-        this.showMessage('bot', this.chatFlow.welcome.message);
-        this.renderOptions(this.chatFlow.welcome.options);
+        this.showMessage('bot', this.chatFlow.selecionarUnidade.message);
+        this.renderOptions(this.chatFlow.selecionarUnidade.options);
     }
 
     showMessage(sender, text) {
@@ -372,19 +547,23 @@ class ChatbotTriagem extends HTMLElement {
 
         if (this.currentStep === 'resultado') {
             // Mostrar resultado
-            const { dept, ramal } = this.userAnswers.result;
+            const { dept, unidade, ramal } = this.userAnswers.result;
             
             const resultBox = document.createElement('div');
             resultBox.innerHTML = `
                 <div class="resultado-box">
-                    <div class="resultado-label">Seu departamento é:</div>
+                    <div class="resultado-label">Departamento:</div>
                     <div class="resultado-dept">${dept}</div>
+                    
+                    <div class="resultado-label" style="margin-top: 1.5rem;">Unidade:</div>
+                    <div class="resultado-dept" style="font-size: 1.1rem; color: #0F6BFF;">${unidade}</div>
                     
                     <div class="resultado-label" style="margin-top: 1.5rem;">Ramal para contato:</div>
                     <div class="resultado-ramal">${ramal}</div>
                     
                     <div class="resultado-instrucoes">
                         📞 Disque ${ramal} no telefone da unidade<br>
+                        📍 ${unidade}<br>
                         ⏰ Horário de atendimento: 7h às 17h<br>
                         📱 Você também pode agendar online
                     </div>
@@ -397,14 +576,29 @@ class ChatbotTriagem extends HTMLElement {
             resetBtn.textContent = '🔄 Fazer Nova Triagem';
             resetBtn.addEventListener('click', () => this.startChat());
             optionsContainer.appendChild(resetBtn);
+        } else if (this.currentStep === 'buscarUnidade') {
+            // Mostrar mensagem de carregamento
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'location-message';
+            messageDiv.innerHTML = `
+                <div class="loading-spinner"></div>
+                <p style="margin-top: 1rem;">Localizando sua posição...</p>
+                <p style="font-size: 0.85rem; color: #9ca3af; margin-top: 0.5rem;">
+                    Certifique-se de permitir acesso à localização
+                </p>
+            `;
+            optionsContainer.appendChild(messageDiv);
+            
+            // Iniciar geolocalização
+            this.buscarUnidadeProxima();
         } else {
-            // Mostrar opções normais
+            // Mostrar opções como cards
             options.forEach(option => {
-                const btn = document.createElement('button');
-                btn.className = 'option-btn';
-                btn.textContent = option.text;
-                btn.addEventListener('click', () => this.handleOption(option));
-                optionsContainer.appendChild(btn);
+                const card = document.createElement('button');
+                card.className = 'option-card';
+                card.textContent = option.text;
+                card.addEventListener('click', () => this.handleOption(option));
+                optionsContainer.appendChild(card);
             });
         }
     }
@@ -413,24 +607,178 @@ class ChatbotTriagem extends HTMLElement {
         // Mostrar resposta do usuário
         this.showMessage('user', option.text);
 
-        // Atualizar estado
-        if (option.dept) {
-            this.userAnswers.result = { dept: option.dept, ramal: option.ramal };
+        // Se é seleção de unidade
+        if (this.currentStep === 'selecionarUnidade') {
+            if (option.isBuscar) {
+                // Ir para tela de busca
+                this.currentStep = option.next;
+                const nextStep = this.chatFlow[this.currentStep];
+                setTimeout(() => {
+                    this.showMessage('bot', nextStep.message);
+                    this.renderOptions(nextStep.options);
+                }, 500);
+                return;
+            } else {
+                // Usar unidade selecionada
+                this.userAnswers.unidade = option.selectedUnit;
+                this.userAnswers.ramalUnidade = option.unidadeData?.ramal;
+            }
         }
 
+        // Atualizar estado
+        if (option.dept) {
+            this.userAnswers.result = { 
+                dept: option.dept, 
+                unidade: this.userAnswers.unidade,
+                ramal: this.userAnswers.ramalUnidade 
+            };
+        }
+
+        // Ir para próximo passo
+        this.prosseguirParaProximoPasso(option);
+    }
+
+    prosseguirParaProximoPasso(option) {
         // Ir para próximo passo
         this.currentStep = option.next;
         const nextStep = this.chatFlow[this.currentStep];
 
         if (nextStep) {
+            // Mostrar mensagem do próximo passo com a unidade selecionada
+            let message = nextStep.message;
+            if (this.userAnswers.unidade && message.includes('{unidade}')) {
+                message = message.replace('{unidade}', this.userAnswers.unidade);
+            }
+
             // Mostrar mensagem do próximo passo
             setTimeout(() => {
-                this.showMessage('bot', nextStep.message);
+                this.showMessage('bot', message);
                 this.renderOptions(nextStep.options);
             }, 500);
         }
+    }
+
+    buscarUnidadeProxima() {
+        // Solicitar permissão de geolocalização
+        if ('geolocation' in navigator) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const userLat = position.coords.latitude;
+                    const userLng = position.coords.longitude;
+                    
+                    // Encontrar unidade mais próxima
+                    let unidadeProxima = this.unidades[0];
+                    let menorDistancia = this.calcularDistancia(
+                        userLat, 
+                        userLng, 
+                        unidadeProxima.lat, 
+                        unidadeProxima.lng
+                    );
+
+                    for (let unidade of this.unidades) {
+                        const distancia = this.calcularDistancia(
+                            userLat, 
+                            userLng, 
+                            unidade.lat, 
+                            unidade.lng
+                        );
+                        if (distancia < menorDistancia) {
+                            menorDistancia = distancia;
+                            unidadeProxima = unidade;
+                        }
+                    }
+
+                    this.userAnswers.unidade = unidadeProxima.nome;
+                    this.showMessage('user', '📍 Não sei - Localizar unidade mais próxima');
+                    this.showMessage('bot', `✅ Encontrei a unidade mais próxima: ${unidadeProxima.nome}`);
+                    
+                    // Armazenar ramal da unidade
+                    this.userAnswers.ramalUnidade = unidadeProxima.ramal;
+                    
+                    // Prosseguir para próxima etapa
+                    setTimeout(() => {
+                        this.currentStep = 'welcome';
+                        const nextStep = this.chatFlow['welcome'];
+                        let message = nextStep.message.replace('{unidade}', unidadeProxima.nome);
+                        this.showMessage('bot', message);
+                        this.renderOptions(nextStep.options);
+                    }, 1500);
+                },
+                (error) => {
+                    // Erro na geolocalização
+                    console.error('Erro de geolocalização:', error);
+                    
+                    let errorMessage = '❌ Não conseguimos localizar sua posição.';
+                    let errorDetails = '';
+                    
+                    if (error.code === error.PERMISSION_DENIED) {
+                        errorMessage = '❌ Acesso à localização negado.';
+                        errorDetails = 'Por favor, permita acesso à sua localização nas configurações do navegador.';
+                    } else if (error.code === error.POSITION_UNAVAILABLE) {
+                        errorMessage = '❌ Informação de localização indisponível.';
+                        errorDetails = 'Tente novamente ou selecione sua unidade manualmente.';
+                    } else if (error.code === error.TIMEOUT) {
+                        errorMessage = '❌ Tempo de localização expirado.';
+                        errorDetails = 'A localização demorou muito. Tente novamente ou selecione manualmente.';
+                    }
+                    
+                    this.showMessage('bot', errorMessage);
+                    
+                    const optionsContainer = this.querySelector('#chatOptions');
+                    optionsContainer.innerHTML = '';
+                    
+                    const errorBox = document.createElement('div');
+                    errorBox.className = 'location-error';
+                    errorBox.innerHTML = `<strong>${errorMessage}</strong><p>${errorDetails}</p>`;
+                    optionsContainer.appendChild(errorBox);
+                    
+                    // Botão para voltar
+                    const backBtn = document.createElement('button');
+                    backBtn.className = 'reset-btn';
+                    backBtn.textContent = '⬅️ Voltar para Seleção de Unidade';
+                    backBtn.style.marginTop = '1rem';
+                    backBtn.addEventListener('click', () => this.startChat());
+                    optionsContainer.appendChild(backBtn);
+                }
+            );
+        } else {
+            // Geolocalização não disponível
+            this.showMessage('bot', '❌ Geolocalização não disponível neste navegador.');
+            
+            const optionsContainer = this.querySelector('#chatOptions');
+            optionsContainer.innerHTML = '';
+            
+            const errorBox = document.createElement('div');
+            errorBox.className = 'location-error';
+            errorBox.innerHTML = '<strong>Seu navegador não suporta geolocalização.</strong><p>Por favor, selecione sua unidade manualmente ou use outro navegador.</p>';
+            optionsContainer.appendChild(errorBox);
+            
+            // Botão para voltar
+            const backBtn = document.createElement('button');
+            backBtn.className = 'reset-btn';
+            backBtn.textContent = '⬅️ Voltar para Seleção de Unidade';
+            backBtn.style.marginTop = '1rem';
+            backBtn.addEventListener('click', () => this.startChat());
+            optionsContainer.appendChild(backBtn);
+        }
+    }
+
+
+
+    calcularDistancia(lat1, lng1, lat2, lng2) {
+        // Fórmula de Haversine para calcular distância entre dois pontos
+        const R = 6371; // Raio da Terra em km
+        const dLat = (lat2 - lat1) * Math.PI / 180;
+        const dLng = (lng2 - lng1) * Math.PI / 180;
+        const a = 
+            Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+            Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+            Math.sin(dLng / 2) * Math.sin(dLng / 2);
+        const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        return R * c;
     }
 }
 
 // Registrar o componente
 customElements.define('chatbot-triagem', ChatbotTriagem);
+
