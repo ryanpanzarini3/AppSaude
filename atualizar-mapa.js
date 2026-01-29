@@ -1,7 +1,3 @@
-/**
- * Script para atualizar mapa.js com coordenadas geocodificadas
- * Executa depois que geocode.js gera o arquivo coordenadas_geocodificadas.json
- */
 
 const fs = require('fs');
 const path = require('path');
@@ -16,19 +12,19 @@ function updateMapWithCoordinates() {
         process.exit(1);
     }
 
-    // Ler coordenadas geocodificadas
+
     const coordenadas = JSON.parse(fs.readFileSync(coordPath, 'utf8'));
     const mapaContent = fs.readFileSync(mapaPath, 'utf8');
 
-    // Atualizar UBS
+
     let updatedMapa = mapaContent;
     let ubsUpdated = 0;
     let upaUpdated = 0;
 
-    // Processar UBS
+
     for (const ubsResult of coordenadas.ubs) {
         if (ubsResult.sucesso) {
-            // Encontrar o padrão para esta unidade
+
             const regex = new RegExp(
                 `nome: "${ubsResult.nome.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}",[^}]*?lat: [^,]+, lng: [^,]+`,
                 'g'
@@ -42,7 +38,7 @@ function updateMapWithCoordinates() {
         }
     }
 
-    // Processar UPAs
+
     for (const upaResult of coordenadas.upa) {
         if (upaResult.sucesso) {
             const regex = new RegExp(
@@ -58,7 +54,7 @@ function updateMapWithCoordinates() {
         }
     }
 
-    // Salvar arquivo atualizado
+
     fs.writeFileSync(mapaPath, updatedMapa);
 
     console.log('\n' + '='.repeat(60));
@@ -71,3 +67,4 @@ function updateMapWithCoordinates() {
 }
 
 updateMapWithCoordinates();
+
