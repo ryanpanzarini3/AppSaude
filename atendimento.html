@@ -19,7 +19,7 @@
     <script src="components/footer.js"></script>
     <script src="components/install-prompt.js"></script>
     <script>
-        // Definir o href do manifest dinâmicamente
+        
         document.getElementById('manifestLink').href = (window.APP_BASE_PATH || './') + 'manifest.json';
     </script>
 </head>
@@ -28,7 +28,7 @@
     <custom-navbar></custom-navbar>
     
     <main>
-        <!-- Header Hero -->
+       
         <section class="bg-gradient-to-br from-blue-50 via-cyan-50 to-blue-50 py-8 md:py-16 lg:py-24">
             <div class="container mx-auto px-4">
                 <a href="index.html" class="inline-flex items-center gap-2 text-blue-600 hover:text-blue-800 mb-4 md:mb-6 font-semibold transition text-sm md:text-base">
@@ -41,14 +41,14 @@
             </div>
         </section>
 
-        <!-- Fluxo de Atendimento -->
+       
         <section class="container mx-auto px-4 py-12 md:py-20">
             <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-10 md:mb-16 text-center">Como Funciona o Atendimento</h2>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-4 md:gap-6 relative">
-                <!-- Linha conectora -->
+                
                 <div class="hidden md:block absolute top-20 left-12 right-12 h-1 bg-gradient-to-r from-blue-400 via-cyan-400 to-blue-400"></div>
                 
-                <!-- Passos -->
+               
                 <div class="relative z-10">
                     <div class="card hover:shadow-xl transition-all duration-300">
                         <div class="w-12 h-12 sm:w-16 sm:h-16 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center font-bold mx-auto mb-4 md:mb-6 text-white text-lg md:text-xl">1</div>
@@ -87,12 +87,11 @@
             </div>
         </section>
 
-        <!-- Tipos de Atendimento -->
         <section class="bg-gradient-to-br from-slate-900 to-slate-800 py-12 md:py-20">
             <div class="container mx-auto px-4">
                 <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold text-white mb-10 md:mb-16 text-center">Tipos de Atendimento</h2>
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
-                    <!-- Atenção Básica -->
+
                     <div class="group bg-white bg-opacity-5 backdrop-blur-sm rounded-xl md:rounded-2xl p-6 md:p-8 border border-white border-opacity-10 hover:bg-opacity-10 transition-all duration-300">
                         <div class="flex items-start gap-3 md:gap-4 mb-4 md:mb-6">
                             <div class="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
@@ -110,7 +109,7 @@
                         </ul>
                     </div>
 
-                    <!-- Pronto Atendimento -->
+
                     <div class="group bg-white bg-opacity-5 backdrop-blur-sm rounded-xl md:rounded-2xl p-6 md:p-8 border border-white border-opacity-10 hover:bg-opacity-10 transition-all duration-300">
                         <div class="flex items-start gap-3 md:gap-4 mb-4 md:mb-6">
                             <div class="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-orange-500 to-orange-600 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
@@ -128,7 +127,7 @@
                         </ul>
                     </div>
 
-                    <!-- Especialidades -->
+
                     <div class="group bg-white bg-opacity-5 backdrop-blur-sm rounded-xl md:rounded-2xl p-6 md:p-8 border border-white border-opacity-10 hover:bg-opacity-10 transition-all duration-300">
                         <div class="flex items-start gap-3 md:gap-4 mb-4 md:mb-6">
                             <div class="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-cyan-500 to-cyan-600 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
@@ -146,7 +145,7 @@
                         </ul>
                     </div>
 
-                    <!-- Exames -->
+
                     <div class="group bg-white bg-opacity-5 backdrop-blur-sm rounded-xl md:rounded-2xl p-6 md:p-8 border border-white border-opacity-10 hover:bg-opacity-10 transition-all duration-300">
                         <div class="flex items-start gap-3 md:gap-4 mb-4 md:mb-6">
                             <div class="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-to-br from-green-500 to-green-600 rounded-lg md:rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
@@ -167,7 +166,7 @@
             </div>
         </section>
 
-        <!-- Como Agendar -->
+
         <section class="container mx-auto px-4 py-12 md:py-20">
             <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-10 md:mb-16 text-center">Como Agendar uma Consulta</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
@@ -200,7 +199,7 @@
             </div>
         </section>
 
-        <!-- Documentos Necessários -->
+
         <section class="bg-gradient-to-br from-blue-50 to-cyan-50 py-12 md:py-20">
             <div class="container mx-auto px-4">
                 <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-center">Documentos Necessários</h2>
@@ -240,7 +239,7 @@
             </div>
         </section>
 
-        <!-- Horários -->
+
         <section class="container mx-auto px-4 py-12 md:py-20">
             <h2 class="text-2xl sm:text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-center">Horários de Atendimento</h2>
             <div class="max-w-2xl mx-auto card overflow-hidden">
@@ -275,7 +274,7 @@
             </div>
         </section>
 
-        <!-- CTA -->
+
         <section class="bg-gradient-to-r from-blue-600 to-cyan-500 py-8 md:py-16 lg:py-20">
             <div class="container mx-auto px-4 text-center text-white">
                 <h2 class="text-2xl sm:text-3xl md:text-5xl font-bold mb-3 md:mb-6">Pronto para seu atendimento?</h2>
@@ -304,3 +303,4 @@
     <script src="js/animations.js"></script>
 </body>
 </html>
+
