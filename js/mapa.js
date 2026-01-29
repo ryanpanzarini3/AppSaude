@@ -1,6 +1,4 @@
-// Ponta Grossa - Paraná, Brasil
-// Coordenadas centrais precisas: -25.138488, -50.242180
-// Dados completos de todas as 47 unidades UBS de Ponta Grossa com dados da Prefeitura Municipal
+
 const ubsUnidades = [
     { id: 1, nome: "Abrahão Federmann", bairro: "Ana Rita", endereco: "R. Quinze de Setembro, 260 - Uvaranas, Ponta Grossa - PR, 84020-050", vacina: false, ecg: false, dentista: false, periodo: "Manhã e Tarde", ramal: "(42)3220-1000", lat: -25.0883606, lng: -50.1435159, color: "#ef4444" },
     { id: 2, nome: "Adam Polan", bairro: "Palmeirinha", endereco: "R. Alberto de Oliveira, 2014 - Nova Rússia, Ponta Grossa - PR, 84071-120", vacina: true, ecg: true, dentista: true, periodo: "Manhã e Tarde", ramal: "(42)3220-1020", lat: -25.068633, lng: -50.1762305, color: "#3b82f6" },
@@ -51,14 +49,13 @@ const ubsUnidades = [
     { id: 47, nome: "Zilda Arns", bairro: "Pq N. Sra. Das Graças", endereco: "Rua Aguinaldo Guimarães da Cunha, s/n", vacina: true, ecg: false, dentista: true, periodo: "Manhã", ramal: "4521", lat: -25.0585141, lng: -50.1633409, color: "#8b5cf6" }
 ];
 
-// Dados das 3 UPAs (Unidades de Pronto Atendimento) de Ponta Grossa com coordenadas reais
+
 const upaUnidades = [
     { id: 1, nome: "UPA Uvaranas", tipo: "UPA", endereco: "Avenida General Carlos Cavalcanti, 4274 – Uvaranas, Ponta Grossa – PR, 84.030-000", bairro: "Uvaranas", lat: -25.0910575, lng: -50.1109483, periodo: "24h" },
     { id: 2, nome: "UPA Santana", tipo: "UPA", endereco: "Rua Dr. Paula Xavier, s/n – Centro, Ponta Grossa – PR, 84.040-120", bairro: "Centro", lat: -25.102523, lng: -50.1608855, periodo: "24h" },
     { id: 3, nome: "UPA Santa Paula", tipo: "UPA", endereco: "Rua Nicolau Kluppel Neto, 1645 – Santa Paula, Ponta Grossa – PR", bairro: "Santa Paula", lat: -25.102144, lng: -50.201616, periodo: "24h" }
 ];
 
-// Definir os limites da cidade de Ponta Grossa (bounding box aproximado)
 const cityBounds = {
     north: -25.0300,
     south: -25.1850,
@@ -66,23 +63,23 @@ const cityBounds = {
     west: -50.2800
 };
 
-// Gerar grid de células para Voronoi (cada célula colorida pela unidade mais próxima)
+
 function generateVoronoiCells() {
     console.log('Gerando áreas de cobertura Voronoi...');
     
     const allUnits = [...ubsUnidades, ...upaUnidades];
     const bbox = [cityBounds.west, cityBounds.south, cityBounds.east, cityBounds.north];
     
-    // Grid fino para cobertura precisa
-    const cellSize = 0.003; // Aproximadamente 300m
+
+    const cellSize = 0.003; 
     const cells = {};
     
-    // Para cada ponto do grid, encontrar a unidade mais próxima
+
     for (let lng = bbox[0]; lng < bbox[2]; lng += cellSize) {
         for (let lat = bbox[1]; lat < bbox[3]; lat += cellSize) {
             const gridPoint = turf.point([lng, lat]);
             
-            // Encontrar unidade mais próxima
+
             let nearestUnit = null;
             let minDistance = Infinity;
             
@@ -109,7 +106,7 @@ function generateVoronoiCells() {
                     };
                 }
                 
-                // Adicionar as 4 coordenadas do quadrado (célula)
+
                 cells[unitId].coords.push([lat, lng]);
                 cells[unitId].coords.push([lat + cellSize, lng]);
                 cells[unitId].coords.push([lat + cellSize, lng + cellSize]);
@@ -121,7 +118,7 @@ function generateVoronoiCells() {
     return cells;
 }
 
-// Obter informação formatada de uma unidade
+
 function getUnitInfo(unit) {
     let services = [];
     if (unit.vacina) services.push("💉 Vacinação");
@@ -138,7 +135,7 @@ function getUnitInfo(unit) {
     </div>`;
 }
 
-// Obter informação formatada de uma UPA
+
 function getUPAInfo(upa) {
     return `<div class="unit-popup">
         <h3 style="color: #dc2626;">🚑 ${upa.nome}</h3>
@@ -153,7 +150,7 @@ function getUPAInfo(upa) {
 
 let map;
 
-// Criar ícone customizado para UPA (ícone de hospital)
+
 function createHospitalIcon() {
     return L.divIcon({
         html: `<div style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); border: 3px solid white;">
@@ -168,7 +165,7 @@ function createHospitalIcon() {
     });
 }
 
-// Inicializar mapa
+
 function initMap() {
     console.log('Iniciando mapa...');
     map = L.map('map').setView([-25.138488, -50.242180], 12);
@@ -179,7 +176,7 @@ function initMap() {
         minZoom: 10
     }).addTo(map);
 
-    // Adicionar marcadores das UBS (círculos coloridos com destaque)
+
     ubsUnidades.forEach(unidade => {
         const marker = L.circleMarker([unidade.lat, unidade.lng], {
             radius: 10,
@@ -203,7 +200,7 @@ function initMap() {
         });
     });
 
-    // Adicionar marcadores das UPAs (ícones de hospital com destaque)
+
     upaUnidades.forEach(upa => {
         const marker = L.marker([upa.lat, upa.lng], {
             icon: createHospitalIcon(),
@@ -220,13 +217,14 @@ function initMap() {
         });
     });
 
-    // Atualizar contadores
+
     document.getElementById('total-units').textContent = ubsUnidades.length + upaUnidades.length;
     document.getElementById('total-areas').textContent = ubsUnidades.length + upaUnidades.length;
 }
 
-// Inicializar quando a página carregar
+
 document.addEventListener('DOMContentLoaded', function() {
     initMap();
     feather.replace();
 });
+
