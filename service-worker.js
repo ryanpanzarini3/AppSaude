@@ -1,4 +1,4 @@
-// Service Worker para SaúdePG
+
 const CACHE_NAME = 'saudepg-v1';
 const urlsToCache = [
   './',
@@ -20,21 +20,21 @@ const urlsToCache = [
   './manifest.json'
 ];
 
-// Instalação do Service Worker
+
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
         console.log('Cache aberto');
         return cache.addAll(urlsToCache.map(url => {
-          // Trata URLs relativas
+
           if (url.startsWith('/')) {
             return url;
           }
           return url;
         })).catch(error => {
           console.warn('Erro ao cachear alguns recursos:', error);
-          // Continua mesmo se alguns recursos não puderem ser cacheados
+
           return Promise.resolve();
         });
       })
@@ -43,7 +43,7 @@ self.addEventListener('install', event => {
   self.skipWaiting();
 });
 
-// Ativação do Service Worker
+
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(cacheNames => {
@@ -60,12 +60,12 @@ self.addEventListener('activate', event => {
   self.clients.claim();
 });
 
-// Estratégia de fetch: Cache First, fallback para Network
+
 self.addEventListener('fetch', event => {
   const { request } = event;
   const url = new URL(request.url);
 
-  // Não cachear requisições externas de APIs
+
   if (url.origin !== location.origin) {
     event.respondWith(
       fetch(request)
@@ -80,12 +80,11 @@ self.addEventListener('fetch', event => {
     return;
   }
 
-  // Para requisições internas: Cache First strategy
+
   event.respondWith(
     caches.match(request)
       .then(response => {
         if (response) {
-          // Atualizar cache em background
           fetch(request)
             .then(networkResponse => {
               caches.open(CACHE_NAME).then(cache => {
@@ -98,12 +97,12 @@ self.addEventListener('fetch', event => {
 
         return fetch(request)
           .then(response => {
-            // Não cachear se não for uma resposta válida
+
             if (!response || response.status !== 200 || response.type === 'error') {
               return response;
             }
 
-            // Clonar a resposta
+
             const responseToCache = response.clone();
             caches.open(CACHE_NAME)
               .then(cache => {
@@ -114,7 +113,7 @@ self.addEventListener('fetch', event => {
           })
           .catch(error => {
             console.warn('Erro na requisição:', error);
-            // Tentar retornar do cache se estiver offline
+
             return caches.match(request) || new Response('Offline - recurso não disponível', {
               status: 503,
               statusText: 'Service Unavailable'
@@ -124,7 +123,7 @@ self.addEventListener('fetch', event => {
   );
 });
 
-// Sincronização em background (quando volta online)
+
 self.addEventListener('sync', event => {
   if (event.tag === 'sync-data') {
     event.waitUntil(
@@ -140,7 +139,7 @@ self.addEventListener('sync', event => {
   }
 });
 
-// Notificações push
+
 self.addEventListener('push', event => {
   const data = event.data ? event.data.json() : {};
   const options = {
@@ -156,7 +155,7 @@ self.addEventListener('push', event => {
   );
 });
 
-// Clique nas notificações
+
 self.addEventListener('notificationclick', event => {
   event.notification.close();
   const urlToOpen = event.notification.data?.url || '/index.html';
@@ -167,14 +166,14 @@ self.addEventListener('notificationclick', event => {
       includeUncontrolled: true
     })
       .then(clientList => {
-        // Verificar se já existe uma janela aberta
+ 
         for (let i = 0; i < clientList.length; i++) {
           const client = clientList[i];
           if (client.url === urlToOpen && 'focus' in client) {
             return client.focus();
           }
         }
-        // Se não existir, abrir uma nova
+
         if (clients.openWindow) {
           return clients.openWindow(urlToOpen);
         }
@@ -183,3 +182,4 @@ self.addEventListener('notificationclick', event => {
 });
 
 console.log('Service Worker carregado');
+
