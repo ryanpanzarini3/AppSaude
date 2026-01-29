@@ -1,12 +1,4 @@
-/**
- * Script de Geocodificação para Unidades de Saúde de Ponta Grossa
- * Usa Google Maps Geocoding API para obter coordenadas precisas
- * 
- * INSTALAÇÃO:
- * 1. npm install axios dotenv
- * 2. Criar arquivo .env com: GOOGLE_MAPS_API_KEY=sua_chave_aqui
- * 3. Executar: node geocode.js
- */
+
 
 require('dotenv').config();
 const axios = require('axios');
@@ -21,11 +13,11 @@ if (!API_KEY) {
     process.exit(1);
 }
 
-// Ler dados do mapa.js
+
 const mapaPath = path.join(__dirname, 'js', 'mapa.js');
 const mapaContent = fs.readFileSync(mapaPath, 'utf8');
 
-// Extrair arrays de dados usando regex
+
 const ubsMatch = mapaContent.match(/const ubsUnidades = \[([\s\S]*?)\];/);
 const upaMatch = mapaContent.match(/const upaUnidades = \[([\s\S]*?)\];/);
 
@@ -34,14 +26,14 @@ if (!ubsMatch || !upaMatch) {
     process.exit(1);
 }
 
-// Converter strings JSON em objetos
+
 const ubsJSON = '[' + ubsMatch[1] + ']';
 const upaJSON = '[' + upaMatch[1] + ']';
 
 let ubsUnidades, upaUnidades;
 
 try {
-    // Parse com tratamento para vírgulas finais
+    
     ubsUnidades = eval(ubsJSON);
     upaUnidades = eval(upaJSON);
 } catch (e) {
@@ -49,10 +41,10 @@ try {
     process.exit(1);
 }
 
-// Função para geocodificar um endereço
+
 async function geocodeAddress(address, nome, bairro) {
     try {
-        // Adicionar bairro e Ponta Grossa para melhor precisão
+
         const fullAddress = `${address}, ${bairro}, Ponta Grossa, Paraná, Brasil`;
         
         const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
@@ -101,7 +93,7 @@ async function geocodeAddress(address, nome, bairro) {
     }
 }
 
-// Função principal
+
 async function geocodeAll() {
     console.log('🗺️  Iniciando geocodificação de unidades de saúde de Ponta Grossa...\n');
     console.log('=' .repeat(80));
@@ -118,7 +110,7 @@ async function geocodeAll() {
         }
     };
 
-    // Geocodificar UBS
+
     console.log(`📍 Geocodificando ${ubsUnidades.length} UBS...\n`);
     for (const ubs of ubsUnidades) {
         const resultado = await geocodeAddress(ubs.endereco, ubs.nome, ubs.bairro);
@@ -126,7 +118,7 @@ async function geocodeAll() {
         if (resultado.sucesso) resultados.resumo.ubsGeocoded++;
         else resultados.resumo.erros++;
         
-        // Aguardar para não sobrecarregar a API
+
         await new Promise(resolve => setTimeout(resolve, 150));
     }
 
@@ -141,7 +133,7 @@ async function geocodeAll() {
         await new Promise(resolve => setTimeout(resolve, 150));
     }
 
-    // Salvar resultados em JSON
+
     const outputPath = path.join(__dirname, 'coordenadas_geocodificadas.json');
     fs.writeFileSync(outputPath, JSON.stringify(resultados, null, 2));
 
@@ -156,8 +148,9 @@ async function geocodeAll() {
     console.log('=' .repeat(80));
 }
 
-// Executar
+
 geocodeAll().catch(error => {
     console.error('Erro fatal:', error);
     process.exit(1);
 });
+
