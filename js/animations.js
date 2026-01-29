@@ -1,11 +1,11 @@
-// Animações e efeitos gerais do site
+
 document.addEventListener('DOMContentLoaded', function() {
     // Ícones Feather
     if (typeof feather !== 'undefined') {
         feather.replace();
     }
 
-    // Scroll animations
+    
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -100px 0px'
@@ -20,12 +20,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
 
-    // Observar cards
+
     document.querySelectorAll('.card, .quick-access-card').forEach(el => {
         observer.observe(el);
     });
 
-    // Smooth scroll for anchor links
+    
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Add scroll shadow to navbar
+
     const navbar = document.querySelector('custom-navbar');
     if (navbar) {
         window.addEventListener('scroll', function() {
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Ripple effect on buttons
+
     document.querySelectorAll('button, a.btn').forEach(btn => {
         btn.addEventListener('click', function(e) {
             const ripple = document.createElement('span');
@@ -71,7 +71,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // Counter animation
     const counters = document.querySelectorAll('[data-target]');
     counters.forEach(counter => {
         const target = parseInt(counter.getAttribute('data-target'));
@@ -89,11 +88,11 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         };
 
-        // Start animation when element comes into view
+
         observer.observe(counter);
     });
 
-    // Mobile menu close on link click
+
     const navbar = document.querySelector('custom-navbar');
     if (navbar) {
         const shadowRoot = navbar.shadowRoot;
@@ -111,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
-// Ripple effect styles
+
 const rippleStyle = document.createElement('style');
 rippleStyle.textContent = `
     button, a.btn {
@@ -147,3 +146,4 @@ rippleStyle.textContent = `
     }
 `;
 document.head.appendChild(rippleStyle);
+
