@@ -210,7 +210,7 @@
         <p class="subtitle">Extraia coordenadas automaticamente dos links do Google Maps</p>
 
         <div class="sections">
-            <!-- Seção de entrada -->
+
             <div class="section">
                 <h2>📥 Entrada</h2>
                 <div class="info-box">
@@ -226,7 +226,7 @@ Adam Polan|https://www.google.com/maps/place/...
                 </div>
             </div>
 
-            <!-- Seção de saída -->
+
             <div class="section">
                 <h2>📤 Saída (JSON)</h2>
                 <textarea id="outputJSON" readonly placeholder="Coordenadas extraídas em JSON..."></textarea>
@@ -237,7 +237,7 @@ Adam Polan|https://www.google.com/maps/place/...
             </div>
         </div>
 
-        <!-- Resultados -->
+
         <div class="results" id="resultsDiv" style="display: none;">
             <h2>📊 Resultados</h2>
             <div id="resultsList"></div>
@@ -286,7 +286,7 @@ Adam Polan|https://www.google.com/maps/place/...
                     continue;
                 }
 
-                // Extrair coordenadas: /@LAT,LNG,
+
                 const match = url.match(/@(-?\d+\.\d+),(-?\d+\.\d+)/);
 
                 if (match) {
@@ -307,14 +307,14 @@ Adam Polan|https://www.google.com/maps/place/...
                 }
             }
 
-            // Mostrar resultados
+
             document.getElementById('resultsList').innerHTML = resultsList;
             document.getElementById('summary').innerHTML = `
                 ✅ Extraídas: ${sucessos} | ❌ Erros: ${erros} | Total: ${linhas.length}
             `;
             document.getElementById('resultsDiv').style.display = 'block';
 
-            // Mostrar JSON
+
             document.getElementById('outputJSON').value = JSON.stringify(coordenadas, null, 2);
         }
 
@@ -341,9 +341,10 @@ Adam Polan|https://www.google.com/maps/place/...
                 return;
             }
 
-            // Avisar que precisa fazer manualmente
+
             alert(`✅ ${coordenadas.length} coordenadas extraídas!\n\n📝 Próximo passo:\n1. Abra o arquivo js/mapa.js\n2. Use Ctrl+H (Find and Replace)\n3. Cole o JSON extraído para atualizar cada unidade\n\nOu você pode fornecer as coordenadas para eu atualizar o arquivo automaticamente.`);
         }
     </script>
 </body>
 </html>
+
