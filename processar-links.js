@@ -1,9 +1,4 @@
-/**
- * Script para extrair coordenadas dos links do Google Maps
- * e atualizar automaticamente o mapa.js
- * 
- * Execução: node processar-links.js
- */
+
 
 const fs = require('fs');
 const path = require('path');
@@ -27,7 +22,6 @@ function procesarLinks() {
     console.log('🗺️  Extraindo coordenadas dos links...\n');
     console.log('=' .repeat(80));
 
-    // Processar cada linha
     for (const linha of linhas) {
         if (!linha.trim()) continue;
 
@@ -37,8 +31,7 @@ function procesarLinks() {
             continue;
         }
 
-        // Regex para extrair coordenadas da URL do Google Maps
-        // Formato: /@LAT,LNG, ou @LAT,LNG,
+
         const coordRegex = /@(-?\d+\.\d+),(-?\d+\.\d+)/;
         const match = url.match(coordRegex);
 
@@ -62,11 +55,11 @@ function procesarLinks() {
     console.log('=' .repeat(80));
     console.log('\n🔄 Atualizando mapa.js...\n');
 
-    // Atualizar o mapa.js
+
     for (const coord of coordenadas) {
         const escapedNome = coord.nome.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-        // Padrão para encontrar e atualizar lat
+
         const latPattern = new RegExp(
             `(nome: "${escapedNome}"[^}]*?lat: )-?\\d+\\.?\\d*,`,
             'g'
@@ -75,7 +68,7 @@ function procesarLinks() {
         const beforeLat = mapaContent;
         mapaContent = mapaContent.replace(latPattern, latReplacement);
 
-        // Padrão para encontrar e atualizar lng
+
         const lngPattern = new RegExp(
             `(nome: "${escapedNome}"[^}]*?lng: )-?\\d+\\.?\\d*,`,
             'g'
@@ -89,7 +82,7 @@ function procesarLinks() {
         }
     }
 
-    // Salvar arquivo atualizado
+
     fs.writeFileSync(mapaPath, mapaContent);
 
     console.log('\n' + '=' .repeat(80));
@@ -102,3 +95,4 @@ function procesarLinks() {
 }
 
 procesarLinks();
+
