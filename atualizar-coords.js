@@ -1,7 +1,4 @@
-/**
- * Script para atualizar mapa.js com coordenadas encontradas
- * Executa depois que buscar-coords.js gera o arquivo coordenadas_encontradas.json
- */
+
 
 const fs = require('fs');
 const path = require('path');
@@ -23,18 +20,18 @@ function updateMap() {
 
     console.log('🔄 Atualizando mapa.js...\n');
 
-    // Criar mapa de nome -> coordenadas
+
     const coordMap = {};
     for (const item of [...coordenadas.ubs, ...coordenadas.upa]) {
         coordMap[item.nome] = { lat: item.lat, lng: item.lng };
     }
 
-    // Processar cada unidade
+
     for (const [nome, coords] of Object.entries(coordMap)) {
         // Escape especial para regex
         const escapedNome = nome.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
         
-        // Padrão para encontrar a linha da unidade
+
         const pattern = new RegExp(
             `(\\{ id: \\d+, nome: "${escapedNome}"[^}]*?lat: )-?\\d+\\.?\\d*,`,
             'g'
@@ -46,7 +43,7 @@ function updateMap() {
         mapaContent = mapaContent.replace(pattern, replacement);
         
         if (mapaContent !== before) {
-            // Agora atualizar lng
+
             const lngPattern = new RegExp(
                 `(nome: "${escapedNome}"[^}]*?lng: )-?\\d+\\.?\\d*,`,
                 'g'
@@ -72,3 +69,4 @@ function updateMap() {
 }
 
 updateMap();
+
