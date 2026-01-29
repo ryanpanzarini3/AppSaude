@@ -1,4 +1,4 @@
-# Script para extrair coordenadas de Google Maps links
+
 $linksFile = 'c:\Users\ryanp\ProjetoSaúde\links-maps\links.txt'
 $outputFile = 'c:\Users\ryanp\ProjetoSaúde\coordenadas-extraidas.json'
 
@@ -12,7 +12,7 @@ foreach ($linha in $links) {
     $nome = $parts[0].Trim()
     $url = $parts[1].Trim()
     
-    # Procura padrão: /@LAT,LNG
+
     if ($url -match '/@(-?[0-9]+\.[0-9]+),(-?[0-9]+\.[0-9]+)') {
         $lat = [double]$matches[1]
         $lng = [double]$matches[2]
@@ -29,9 +29,10 @@ foreach ($linha in $links) {
     }
 }
 
-# Gera JSON
+
 $json = $unidades | ConvertTo-Json
 $json | Out-File -FilePath $outputFile -Encoding UTF8
 
 Write-Host "`n✅ Coordenadas extraídas para: $outputFile"
 Write-Host "Total de unidades: $($unidades.Count)"
+
