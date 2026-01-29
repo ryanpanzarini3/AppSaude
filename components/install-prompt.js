@@ -13,7 +13,7 @@ class InstallPrompt extends HTMLElement {
     }
 
     render() {
-        // Para iOS, mostra prompt diferente com link para instruções
+        
         if (this.isIOS) {
             this.renderIOSPrompt();
         } else {
@@ -139,14 +139,14 @@ class InstallPrompt extends HTMLElement {
     }
 
     setupListeners() {
-        // Detectar quando a PWA pode ser instalada
+       
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             this.deferredPrompt = e;
             this.showPrompt();
         });
 
-        // Detectar instalação bem-sucedida
+       
         window.addEventListener('appinstalled', () => {
             console.log('✓ PWA instalada com sucesso');
             this.isInstalled = true;
@@ -154,7 +154,7 @@ class InstallPrompt extends HTMLElement {
             this.notifyInstalled();
         });
 
-        // Botões
+       
         const installBtn = this.querySelector('#install-btn');
         const closeBtn = this.querySelector('#install-close');
         const laterBtn = this.querySelector('#install-later');
@@ -174,7 +174,7 @@ class InstallPrompt extends HTMLElement {
             });
         }
 
-        // Verificar se já está instalado
+        
         this.checkIfInstalled();
     }
 
@@ -203,17 +203,17 @@ class InstallPrompt extends HTMLElement {
     }
 
     showPrompt() {
-        // Não mostrar se já foi instalado
+       
         if (this.isInstalled) {
             return;
         }
 
-        // Não mostrar se recusou recentemente
+        
         const lastDismissed = localStorage.getItem('pwa-install-dismissed');
         if (lastDismissed) {
             const daysSinceDismissed = (Date.now() - new Date(lastDismissed).getTime()) / (1000 * 60 * 60 * 24);
             if (daysSinceDismissed < 7) {
-                return; // Mostrar novamente após 7 dias
+                return; 
             }
         }
 
@@ -233,7 +233,7 @@ class InstallPrompt extends HTMLElement {
     }
 
     notifyInstalled() {
-        // Mostrar notificação de sucesso
+        
         const notification = document.createElement('div');
         notification.className = 'fixed top-4 right-4 bg-green-500 text-white px-6 py-3 rounded-lg shadow-lg animate-slide-up z-50';
         notification.textContent = '✓ SaúdePG instalado com sucesso!';
@@ -245,7 +245,7 @@ class InstallPrompt extends HTMLElement {
     }
 
     checkIfInstalled() {
-        // Verificar se a app está em modo standalone (instalada)
+        
         const isInStandaloneMode = () =>
             (window.navigator.standalone === true) ||
             (window.matchMedia('(display-mode: standalone)').matches);
@@ -257,8 +257,9 @@ class InstallPrompt extends HTMLElement {
     }
 }
 
-// Registrar o componente
+
 customElements.define('install-prompt', InstallPrompt);
 
-// Log de inicialização
+
 console.log('✓ InstallPrompt carregado');
+
