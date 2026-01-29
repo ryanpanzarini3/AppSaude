@@ -28,21 +28,21 @@
     <unidades-proximas></unidades-proximas>
 
     <script>
-        // Verificar Leaflet
+      
         if (typeof L !== 'undefined') {
             document.getElementById('leaflet-status').innerHTML = '<span class="success">✓ Leaflet carregado</span>';
         } else {
             document.getElementById('leaflet-status').innerHTML = '<span class="error">✗ Leaflet NÃO carregado</span>';
         }
 
-        // Verificar componente
+
         if (customElements.get('unidades-proximas')) {
             document.getElementById('component-status').innerHTML = '<span class="success">✓ Componente registrado</span>';
         } else {
             document.getElementById('component-status').innerHTML = '<span class="error">✗ Componente NÃO registrado</span>';
         }
 
-        // Verificar elemento no DOM
+
         setTimeout(() => {
             const elem = document.querySelector('unidades-proximas');
             if (elem) {
@@ -54,3 +54,4 @@
     </script>
 </body>
 </html>
+
