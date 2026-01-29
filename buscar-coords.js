@@ -1,19 +1,14 @@
-/**
- * Script rápido para buscar coordenadas usando Nominatim (OpenStreetMap)
- * ✅ TOTALMENTE GRATUITO - sem API key necessária
- * 
- * Execução: node buscar-coords.js
- */
+
 
 const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 
-// Ler dados do mapa.js
+
 const mapaPath = path.join(__dirname, 'js', 'mapa.js');
 const mapaContent = fs.readFileSync(mapaPath, 'utf8');
 
-// Extrair arrays
+
 const ubsMatch = mapaContent.match(/const ubsUnidades = \[([\s\S]*?)\];/);
 const upaMatch = mapaContent.match(/const upaUnidades = \[([\s\S]*?)\];/);
 
@@ -26,7 +21,7 @@ try {
     process.exit(1);
 }
 
-// Função para buscar coordenadas via Nominatim
+
 async function getCoordinates(address, bairro, nome) {
     try {
         const fullAddress = `${address}, ${bairro}, Ponta Grossa, Paraná, Brasil`;
@@ -62,7 +57,7 @@ async function getCoordinates(address, bairro, nome) {
     }
 }
 
-// Função principal
+
 async function buscarTodos() {
     console.log('🗺️  Buscando coordenadas precisas via OpenStreetMap (Nominatim)\n');
     console.log('=' .repeat(80));
@@ -86,8 +81,7 @@ async function buscarTodos() {
         } else {
             resultados.resumo.falhas++;
         }
-        
-        // Respeitar rate limit do Nominatim
+
         await new Promise(resolve => setTimeout(resolve, 1100));
     }
 
@@ -109,7 +103,7 @@ async function buscarTodos() {
         await new Promise(resolve => setTimeout(resolve, 1100));
     }
 
-    // Salvar resultados
+
     const outputPath = path.join(__dirname, 'coordenadas_encontradas.json');
     fs.writeFileSync(outputPath, JSON.stringify(resultados, null, 2));
 
@@ -127,3 +121,4 @@ buscarTodos().catch(error => {
     console.error('❌ Erro:', error);
     process.exit(1);
 });
+
