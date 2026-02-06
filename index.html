@@ -27,6 +27,7 @@
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/2.10.0/lottie.min.js"></script>
     <script src="components/navbar.js"></script>
     <script src="components/footer.js"></script>
     <script src="components/quick-access.js"></script>
@@ -49,7 +50,24 @@
             
             <div class="container mx-auto px-4 py-8 md:py-32 relative z-10">
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 items-center">
-                    <div class="animate-fade-in">
+                    <div class="hidden md:block order-2">
+                        <div class="relative">
+                            <div class="absolute inset-0 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-2xl blur-3xl opacity-20"></div>
+                          <script
+  src="https://unpkg.com/@lottiefiles/dotlottie-wc@0.8.11/dist/dotlottie-wc.js"
+  type="module"
+></script>
+
+<dotlottie-wc
+  src="https://lottie.host/f99c3155-4fca-40a5-9c34-0da20054d0cf/9wXv6lAPIu.lottie"
+  style="width: 700px;height: 700px"
+  autoplay
+  loop
+></dotlottie-wc>
+                        </div>
+                    </div>
+                    
+                    <div class="animate-fade-in order-1">
                         <h1 class="text-3xl sm:text-4xl md:text-6xl font-bold mb-4 md:mb-6 leading-tight">
                             <span class="bg-gradient-to-r from-blue-600 to-cyan-500 bg-clip-text text-transparent">
                                 Sua Saúde
@@ -69,19 +87,6 @@
                                 <i data-feather="help-circle" class="inline mr-2 w-5 h-5"></i>
                                 Como Ser Atendido
                             </a>
-                        </div>
-                    </div>
-                    
-                    <div class="hidden md:block">
-                        <div class="relative">
-                            <div class="absolute inset-0 bg-gradient-to-r from-blue-400 to-cyan-400 rounded-2xl blur-3xl opacity-20"></div>
-                            <svg class="relative w-full h-auto" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="150" cy="150" r="100" fill="#0F6BFF" opacity="0.1"/>
-                                <circle cx="150" cy="150" r="80" fill="#00D4FF" opacity="0.2"/>
-                                <path d="M150 80 L180 140 L140 140 Z" fill="#0F6BFF"/>
-                                <circle cx="150" cy="150" r="50" fill="#fff" stroke="#0F6BFF" stroke-width="2"/>
-                                <text x="150" y="160" text-anchor="middle" font-size="40" fill="#0F6BFF">+</text>
-                            </svg>
                         </div>
                     </div>
                 </div>
@@ -201,6 +206,18 @@
             }
             
             feather.replace();
+
+            // Carregar animação Lottie
+            if (typeof lottie !== 'undefined') {
+                lottie.loadAnimation({
+                    container: document.getElementById('lottie-container'),
+                    renderer: 'svg',
+                    loop: true,
+                    autoplay: true,
+                    path: 'https://lottie.host/d71e2c3c-3c18-4b0a-b2e3-4e5c6f7g8h9i/BgWRliLeIA.json'
+                });
+                console.log('✓ Animação Lottie carregada');
+            }
         });
     </script>
     <script src="script.js"></script>
