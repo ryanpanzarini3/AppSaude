@@ -821,8 +821,8 @@ class UnidadesProximas extends HTMLElement {
         ];
         
 
-        const ubsIcon = L.divIcon({
-            html: '<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="14" fill="#0F6BFF" stroke="white" stroke-width="2"/><path d="M16 9v14M9 16h14" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>',
+        const ubsIcon = L.icon({
+            iconUrl: 'imagens/hospital (3).png',
             iconSize: [32, 32],
             iconAnchor: [16, 16],
             popupAnchor: [0, -16],
@@ -830,8 +830,8 @@ class UnidadesProximas extends HTMLElement {
         });
         
 
-        const upaIcon = L.divIcon({
-            html: '<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="16" cy="16" r="14" fill="#ef4444" stroke="white" stroke-width="2"/><path d="M16 9l3.5 10h10.5l-8.5 6.5 3.5 10-10-7.5-10 7.5 3.5-10-8.5-6.5h10.5z" fill="white"/></svg>',
+        const upaIcon = L.icon({
+            iconUrl: 'imagens/hospital (1).png',
             iconSize: [32, 32],
             iconAnchor: [16, 16],
             popupAnchor: [0, -16],
