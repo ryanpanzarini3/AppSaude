@@ -152,16 +152,35 @@ let map;
 
 
 function createHospitalIcon() {
-    return L.divIcon({
-        html: `<div style="background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%); width: 40px; height: 40px; border-radius: 8px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); border: 3px solid white;">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 2v20M2 12h20M6 8h12v8H6z M9 12h6M12 9v6"></path>
-            </svg>
-        </div>`,
-        className: 'hospital-icon',
+    return L.icon({
+        iconUrl: 'imagens/hospital (2).png',
         iconSize: [40, 40],
         iconAnchor: [20, 40],
-        popupAnchor: [0, -40]
+        popupAnchor: [0, -40],
+        shadowSize: [41, 41],
+        shadowAnchor: [13, 41]
+    });
+}
+
+function createUnidadesIcon() {
+    return L.icon({
+        iconUrl: 'imagens/hospital (3).png',
+        iconSize: [40, 40],
+        iconAnchor: [20, 40],
+        popupAnchor: [0, -40],
+        shadowSize: [41, 41],
+        shadowAnchor: [13, 41]
+    });
+}
+
+function createUnidadesIcon3() {
+    return L.icon({
+        iconUrl: 'imagens/hospital (2).png',
+        iconSize: [40, 40],
+        iconAnchor: [20, 40],
+        popupAnchor: [0, -40],
+        shadowSize: [41, 41],
+        shadowAnchor: [13, 41]
     });
 }
 
@@ -178,24 +197,17 @@ function initMap() {
 
 
     ubsUnidades.forEach(unidade => {
-        const marker = L.circleMarker([unidade.lat, unidade.lng], {
-            radius: 10,
-            fillColor: unidade.color,
-            color: '#fff',
-            weight: 3,
-            opacity: 1,
-            fillOpacity: 0.95,
+        const marker = L.marker([unidade.lat, unidade.lng], {
+            icon: createUnidadesIcon(),
             zIndex: 1000
         }).addTo(map);
 
         marker.bindPopup(getUnitInfo(unidade));
 
         marker.on('mouseover', function() {
-            this.setRadius(13);
             this.openPopup();
         });
         marker.on('mouseout', function() {
-            this.setRadius(10);
             this.closePopup();
         });
     });
